@@ -2,6 +2,9 @@ package ejbs;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -45,15 +48,14 @@ public class GestionUtilisateurs {
     	newAbonne.setMotDePasse(motDePasse);
     	newAbonne.setAdresse(adresse);
     	newAbonne.setTelephone(telephone);
-    	newAbonne.setDateCreation( new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-    		    .parse("2017-11-15 15:30:14.332"));
+    	newAbonne.setDateCreation(new Date());
     	
     	newAbonne.setRole("ABONNE");
     	
     	et.begin();
     	em.persist(newAbonne);
     	et.commit();}
-    	catch (ParseException e) {
+    	catch (Exception e) {
     		e.printStackTrace();
     	}
     	
