@@ -16,7 +16,7 @@ public class Piece implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String auteur;
@@ -31,7 +31,7 @@ public class Piece implements Serializable {
 	private String nom;
 
 	//bi-directional many-to-one association to ComedienPiece
-	@OneToMany(mappedBy="piece", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="piece", cascade=CascadeType.ALL)
 	private List<ComedienPiece> comedienPieces;
 
 	//bi-directional many-to-one association to Commentaire
@@ -39,12 +39,12 @@ public class Piece implements Serializable {
 	private List<Commentaire> commentaires;
 
 	//bi-directional many-to-one association to EquipeTechnique
-	@OneToMany(mappedBy="piece", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="piece", cascade=CascadeType.ALL)
 	private List<EquipeTechnique> equipeTechniques;
 
-	//bi-directional many-to-one association to PiecePhoto
+	//bi-directional many-to-one association to Photo
 	@OneToMany(mappedBy="piece")
-	private List<PiecePhoto> piecePhotos;
+	private List<Photo> photos;
 
 	//bi-directional many-to-one association to Representation
 	@OneToMany(mappedBy="piece")
@@ -159,26 +159,26 @@ public class Piece implements Serializable {
 		return equipeTechnique;
 	}
 
-	public List<PiecePhoto> getPiecePhotos() {
-		return this.piecePhotos;
+	public List<Photo> getPhotos() {
+		return this.photos;
 	}
 
-	public void setPiecePhotos(List<PiecePhoto> piecePhotos) {
-		this.piecePhotos = piecePhotos;
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 
-	public PiecePhoto addPiecePhoto(PiecePhoto piecePhoto) {
-		getPiecePhotos().add(piecePhoto);
-		piecePhoto.setPiece(this);
+	public Photo addPhoto(Photo photo) {
+		getPhotos().add(photo);
+		photo.setPiece(this);
 
-		return piecePhoto;
+		return photo;
 	}
 
-	public PiecePhoto removePiecePhoto(PiecePhoto piecePhoto) {
-		getPiecePhotos().remove(piecePhoto);
-		piecePhoto.setPiece(null);
+	public Photo removePhoto(Photo photo) {
+		getPhotos().remove(photo);
+		photo.setPiece(null);
 
-		return piecePhoto;
+		return photo;
 	}
 
 	public List<Representation> getRepresentations() {

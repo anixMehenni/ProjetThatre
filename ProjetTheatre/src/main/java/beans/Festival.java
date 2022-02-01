@@ -16,6 +16,7 @@ public class Festival implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -37,15 +38,35 @@ public class Festival implements Serializable {
 
 	private String ville;
 
-	//bi-directional many-to-one association to Organisateur
-	@ManyToOne
-	@JoinColumn(name="id_organisateur")
-	private Organisateur organisateur;
+	//bi-directional many-to-many association to Organisateur
+	@ManyToMany
+	@JoinTable(
+		name="festival_organisateur"
+		, joinColumns={
+			@JoinColumn(name="id_festival")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_organisateur")
+			}
+		)
+	private List<Organisateur> organisateurs;
 
-	//bi-directional many-to-one association to Sponsor
-	@ManyToOne
-	@JoinColumn(name="id_sponsor")
-	private Sponsor sponsor;
+	//bi-directional many-to-many association to Sponsor
+	@ManyToMany
+	@JoinTable(
+		name="festival_sponsor"
+		, joinColumns={
+			@JoinColumn(name="id_festival")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_sponsor")
+			}
+		)
+	private List<Sponsor> sponsors;
+
+	//bi-directional many-to-one association to Photo
+	@OneToMany(mappedBy="festival")
+	private List<Photo> photos;
 
 	//bi-directional many-to-one association to Representation
 	@OneToMany(mappedBy="festival")
@@ -110,20 +131,42 @@ public class Festival implements Serializable {
 		this.ville = ville;
 	}
 
-	public Organisateur getOrganisateur() {
-		return this.organisateur;
+	public List<Organisateur> getOrganisateurs() {
+		return this.organisateurs;
 	}
 
-	public void setOrganisateur(Organisateur organisateur) {
-		this.organisateur = organisateur;
+	public void setOrganisateurs(List<Organisateur> organisateurs) {
+		this.organisateurs = organisateurs;
 	}
 
-	public Sponsor getSponsor() {
-		return this.sponsor;
+	public List<Sponsor> getSponsors() {
+		return this.sponsors;
 	}
 
-	public void setSponsor(Sponsor sponsor) {
-		this.sponsor = sponsor;
+	public void setSponsors(List<Sponsor> sponsors) {
+		this.sponsors = sponsors;
+	}
+
+	public List<Photo> getPhotos() {
+		return this.photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
+	}
+
+	public Photo addPhoto(Photo photo) {
+		getPhotos().add(photo);
+		photo.setFestival(this);
+
+		return photo;
+	}
+
+	public Photo removePhoto(Photo photo) {
+		getPhotos().remove(photo);
+		photo.setFestival(null);
+
+		return photo;
 	}
 
 	public List<Representation> getRepresentations() {

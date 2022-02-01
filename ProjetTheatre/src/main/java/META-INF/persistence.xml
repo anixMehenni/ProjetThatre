@@ -3,7 +3,6 @@
 	<persistence-unit name="ProjetTheatre" transaction-type="RESOURCE_LOCAL">
 		<non-jta-data-source>java:/TheatreMySqlDS</non-jta-data-source>
 		<class>beans.Billet</class>
-		<class>beans.BilletPlace</class>
 		<class>beans.Comedien</class>
 		<class>beans.ComedienPiece</class>
 		<class>beans.Commentaire</class>
@@ -16,7 +15,6 @@
 		<class>beans.Personne</class>
 		<class>beans.Photo</class>
 		<class>beans.Piece</class>
-		<class>beans.PiecePhoto</class>
 		<class>beans.Place</class>
 		<class>beans.Representation</class>
 		<class>beans.Role</class>
