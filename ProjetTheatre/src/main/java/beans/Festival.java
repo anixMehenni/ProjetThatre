@@ -21,7 +21,7 @@ public class Festival implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_creation")
-	private Date dateCreation;
+	private Date dateCreation = new Date();
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_debut")
