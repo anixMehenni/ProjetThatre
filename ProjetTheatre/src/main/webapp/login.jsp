@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <h3> Se Connecter </h3>
-<form action="user_login" method="post">
+<form action="/ProjetTheatre/ConnexionAbonneServlet" method="post">
 <table style="width: 20%">
                  <tr>
                  <td>Email</td>

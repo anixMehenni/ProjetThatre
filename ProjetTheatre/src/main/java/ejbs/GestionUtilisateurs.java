@@ -14,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.Query;
 
 import beans.Utilisateur;
 
@@ -58,6 +59,27 @@ public class GestionUtilisateurs {
     	catch (Exception e) {
     		e.printStackTrace();
     	}
+    	
+    }
+    
+    public Utilisateur seConnecter (String email, String motDePasse){
+    		EntityManager em = emf.createEntityManager();
+            Query query = em
+                    .createQuery("SELECT u FROM Utilisateur as u where u.email like :email");
+            query.setParameter("email", email);
+            Utilisateur resultatQuery = (Utilisateur) query.getSingleResult();
+            
+            Utilisateur currentUser = new Utilisateur();
+            currentUser.setPrenom(resultatQuery.getPrenom());
+            currentUser.setAdresse(resultatQuery.getAdresse());
+            currentUser.setActif(resultatQuery.getActif());
+            
+            
+            if (resultatQuery.getMotDePasse() == motDePasse) {
+            	return currentUser;
+            }
+            return currentUser;
+
     	
     }
 

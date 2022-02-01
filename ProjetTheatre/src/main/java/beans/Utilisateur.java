@@ -13,6 +13,7 @@ import java.util.Date;
 @NamedQuery(name="Utilisateur.findAll", query="SELECT u FROM Utilisateur u")
 public class Utilisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
+	public static final String _UTILISATEUR_COURANT = "_UTILISATEUR_COURANT";
 
 	@Id
 	private int id;
