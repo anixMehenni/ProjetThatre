@@ -1,4 +1,4 @@
-package objetsMetier;
+package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -13,6 +13,9 @@ import java.util.Date;
 @NamedQuery(name="Billet.findAll", query="SELECT b FROM Billet b")
 public class Billet implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	@Column(name="annule")
+	private byte annule;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_reservation")
@@ -25,6 +28,14 @@ public class Billet implements Serializable {
 	private String lienTelechargement;
 
 	public Billet() {
+	}
+
+	public byte getAnnule() {
+		return this.annule;
+	}
+
+	public void setAnnule(byte annule) {
+		this.annule = annule;
 	}
 
 	public Date getDateReservation() {

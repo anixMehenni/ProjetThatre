@@ -1,4 +1,4 @@
-package objetsMetier;
+package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
