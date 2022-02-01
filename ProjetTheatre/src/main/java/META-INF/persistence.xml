@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-	<persistence-unit name="ProjetTheatre">
+	<persistence-unit name="ProjetTheatre" transaction-type="RESOURCE_LOCAL">
+		<non-jta-data-source>java:/TheatreMySqlDS</non-jta-data-source>
+		<class>beans.Billet</class>
+		<class>beans.BilletPlace</class>
+		<class>beans.Comedien</class>
+		<class>beans.ComedienPiece</class>
+		<class>beans.Commentaire</class>
+		<class>beans.EquipeTechnique</class>
+		<class>beans.Festival</class>
+		<class>beans.Lieu</class>
+		<class>beans.Organisateur</class>
+		<class>beans.Paiement</class>
+		<class>beans.Panier</class>
+		<class>beans.Personne</class>
+		<class>beans.Photo</class>
+		<class>beans.Piece</class>
+		<class>beans.PiecePhoto</class>
+		<class>beans.Place</class>
+		<class>beans.Representation</class>
+		<class>beans.Role</class>
+		<class>beans.Sponsor</class>
+		<class>beans.Utilisateur</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/projet-java-theatre"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value=""/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
 	</persistence-unit>
 </persistence>
