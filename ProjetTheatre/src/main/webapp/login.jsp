@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 <meta charset="ISO-8859-1">
 <h3> Se Connecter </h3>
 <form action="/ProjetTheatre/ConnexionAbonneServlet" method="post">
@@ -16,7 +18,7 @@
                                     <td><input type="password" name="motDePasse" /></td>
                            </tr>
                  </table>
-                 <input type="submit" value="Login" /></form>
+                 <button type="submit" class="btn btn-primary">Login</button></form>
                  <a href="/ProjetTheatre/CreationCompteAbonneServlet"><b>S'inscrire</b></a>
 </body>
 </html>
