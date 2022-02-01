@@ -16,13 +16,14 @@ public class Piece implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	private String auteur;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_creation")
-	private Date dateCreation;
+	private Date dateCreation = new Date();
 
 	@Lob
 	private String description;
@@ -30,7 +31,7 @@ public class Piece implements Serializable {
 	private String nom;
 
 	//bi-directional many-to-one association to ComedienPiece
-	@OneToMany(mappedBy="piece")
+	@OneToMany(mappedBy="piece", cascade = CascadeType.ALL)
 	private List<ComedienPiece> comedienPieces;
 
 	//bi-directional many-to-one association to Commentaire
@@ -38,7 +39,7 @@ public class Piece implements Serializable {
 	private List<Commentaire> commentaires;
 
 	//bi-directional many-to-one association to EquipeTechnique
-	@OneToMany(mappedBy="piece")
+	@OneToMany(mappedBy="piece", cascade = CascadeType.ALL)
 	private List<EquipeTechnique> equipeTechniques;
 
 	//bi-directional many-to-one association to PiecePhoto
