@@ -18,22 +18,22 @@
 <link rel="stylesheet" href="/ProjetTheatre/src/main/webapp/css/bootstrap.min.css">-->
 
 <!-- Style -->
-<link rel="stylesheet" href="/ProjetTheatre/src/main/webapp/css/loginStyle.css">
+<link rel="stylesheet" href="/ProjetTheatre/css/loginStyle.css">
 
 <!-- Style -->
-<link rel="stylesheet" href="/ProjetTheatre/src/main/webapp/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/ProjetTheatre/css/owl.carousel.min.css">
 
 <!-- Style -->
-<link rel="stylesheet" href="/ProjetTheatre/src/main/webapp/css/icomoonstyle.css">
+<link rel="stylesheet" href="/ProjetTheatre/css/icomoonstyle.css">
 
 <div class="d-lg-flex half">
-    <div class="bg order-1 order-md-2" style="background-image: url('https://img-4.linternaute.com/CRjbQ1RCVbD16f9U-lRPqhyZhZA=/1080x/smart/47b0d9e9b807480f9af424d6b1ff3af0/ccmcms-linternaute/12369448.jpg');"></div>
+    <div class="bg order-1 order-md-2" style="background-image: url('/ProjetTheatre/images/bg_1.jpg');"></div>
     	<div class="contents order-2 order-md-1">
     	<div class="container">
         	<div class="row align-items-center justify-content-center">
-          		<div class="col-md align-items-center">
+          		<div class="col-md-7 align-items-center">
     			 <h3><strong>Se Connecter</strong></h3>
-    			 <img alt="" src="/ProjetTheatre/src/main/webapp/images/bg_1.jpg"/>
+    			 
     			 <form action="/ProjetTheatre/ConnexionAbonneServlet" method="post">
     				<div class="form-group first">
                 		<label for="email">Adresse email</label>
@@ -60,9 +60,9 @@
 
     
   </div>                 
-	<script type="text/javascript" src="${jakarta.servlet.jsp.PageContext}/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="${jakarta.servlet.jsp.PageContext}/js/popper.min.js"></script>
-    <script type="text/javascript" src="${jakarta.servlet.jsp.PageContext}/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="${jakarta.servlet.jsp.PageContext}/js/main.js"></script>
+	<script type="text/javascript" src="/ProjetTheatre/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/popper.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/main.js"></script>
 </body>
 </html>
