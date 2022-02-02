@@ -1,40 +1,98 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html"%>
+    
+<%@ include file="/pages/shared/Header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 <meta charset="ISO-8859-1">
+
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
 <title>Inscription | Nouveau compte abonné</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+<!-- Style -->
+<link rel="stylesheet" href="/ProjetTheatre/css/loginStyle.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="/ProjetTheatre/css/owl.carousel.min.css">
+
+<!-- Style -->
+<link rel="stylesheet" href="/ProjetTheatre/css/icomoonstyle.css">
+
 </head>
 <body>
-<h1>Nouveau compte abonné</h1>
-<form action="/ProjetTheatre/CreationCompteAbonneServlet" method="post">
-                           <table style="with: 20%">
-                                    <tr>
-                                              <td>Nom</td>
-                                              <td><input type="text" placeholder="Nom" name="nom" required/></td>
-                                    </tr>
-                                    <tr>
-                                              <td>Prénom</td>
-                                              <td><input type="text" placeholder="Prénom" name="prenom" required/></td>
-                                    </tr>
-                                    <tr>
-                                              <td>Adresse email</td>
-                                              <td><input type="email" placeholder="example@email.com" name="email" required/></td>
-                                    </tr>
-                                    <tr>
-                                              <td>Mot de passe</td>
-                                              <td><input type="password" placeholder="Mot de Passe" name="motDePasse" required/></td>
-                                    </tr>
-                                    <tr>
-                                              <td>Numéro de téléphone</td>
-                                              <td><input type="tel" name="telephone" pattern="[0-9]{10}" required/></td>
-                                    </tr>
-                                    <tr>
-                                    	<td>Adresse postale</td>
-                                    	<td><input type="text" placeholder="Adresse postale" name="adresse" required/></td>
-                                    </tr>
-                           </table>
-                           <input type="submit" value="Submit" /></form>
+<div class="d-lg-flex half">
+    <div class="bg order-1 order-md-2" style="background-image: url('/ProjetTheatre/images/bg_1.jpg');"></div>
+    	<div class="contents order-2 order-md-1">
+    	<div class="container">
+        	<div class="row align-items-center justify-content-center">
+          		<div class="col-md-7 py-5">
+          		<h3><strong>Inscription</strong></h3>
+            	<form action="/ProjetTheatre/CreationCompteAbonneServlet" method="post">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group first">
+										<label for="name">Nom</label> <input type="text" class="form-control" 
+										placeholder="Nom" name="nom" id="nom" required/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group first">
+										<label for="father_name">Prénom</label> <input type="text" class="form-control" 
+										placeholder="Prénom" name="prenom" id="prenom" required/>
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group first">
+										<label for="address">Email</label> <input type="email" class="form-control" 
+										placeholder="example@email.com" name="email" id="email" required/>
+									</div>
+								</div>
+							</div>
+                            <div class="row">
+								<div class="col-md-6">
+									<div class="form-group first">
+										<label for="address">Numéro de téléphone</label> <input type="tel" class="form-control" 
+										name="telephone" pattern="[0-9]{10}" placeholder="06XXXXXXXX" id="telephone" required/>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group first">
+										<label for="address">Adresse</label> <input type="text" class="form-control" 
+										placeholder="Adresse postale" name="adresse" id="adresse" required/>
+									</div>
+								</div>
+							</div>
+							
+                        	<div class="form-group fourth">
+                            	<label for="address">Mot de passe</label>
+                            	<input type="password" class="form-control" placeholder="Mot de Passe" name="motDePasse" id="motDePasse" required/>
+                        	</div>
+                        	
+                        	<input type="submit" value="Créer un compte" class="btn btn-block btn-primary" name="submit" id="submit" />
+            	</form>
+     			</div>
+    		</div>
+  		</div>
+     </div> 
+</div>
+
+<!-- JS -->
+    <script type="text/javascript" src="/ProjetTheatre/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/popper.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/ProjetTheatre/js/main.js"></script>
+
 </body>
 </html>
