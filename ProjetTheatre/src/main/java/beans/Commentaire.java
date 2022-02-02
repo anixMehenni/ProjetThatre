@@ -3,7 +3,6 @@ package beans;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the commentaire database table.
  * 
@@ -12,8 +11,11 @@ import javax.persistence.*;
 @NamedQuery(name="Commentaire.findAll", query="SELECT c FROM Commentaire c")
 public class Commentaire implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
+	public enum StatutEnum {CREE, REJETE, VALIDE};
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	@Lob

@@ -85,5 +85,9 @@ public class GestionPieces {
     	et.commit();
     	return newPiece;
     }
+    
+    public Piece findOne(int id) {
+    	return emf.createEntityManager().find(Piece.class, id);
+    }
 
 }

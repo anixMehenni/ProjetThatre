@@ -15,12 +15,13 @@ public class Organisateur implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String nom;
 
-	//bi-directional many-to-one association to Festival
-	@OneToMany(mappedBy="organisateur")
+	//bi-directional many-to-many association to Festival
+	@ManyToMany(mappedBy="organisateurs")
 	private List<Festival> festivals;
 
 	public Organisateur() {
@@ -48,20 +49,6 @@ public class Organisateur implements Serializable {
 
 	public void setFestivals(List<Festival> festivals) {
 		this.festivals = festivals;
-	}
-
-	public Festival addFestival(Festival festival) {
-		getFestivals().add(festival);
-		festival.setOrganisateur(this);
-
-		return festival;
-	}
-
-	public Festival removeFestival(Festival festival) {
-		getFestivals().remove(festival);
-		festival.setOrganisateur(null);
-
-		return festival;
 	}
 
 }
