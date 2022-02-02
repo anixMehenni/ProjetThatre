@@ -43,7 +43,7 @@ public class Piece implements Serializable {
 	private List<EquipeTechnique> equipeTechniques;
 
 	//bi-directional many-to-one association to Photo
-	@OneToMany(mappedBy="piece")
+	@OneToMany(mappedBy="piece", cascade=CascadeType.ALL)
 	private List<Photo> photos;
 
 	//bi-directional many-to-one association to Representation
