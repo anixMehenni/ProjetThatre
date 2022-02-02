@@ -14,12 +14,13 @@ import java.util.Date;
 public class Panier implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_creation")
 	private Date dateCreation;
-	
-	@Id
-	private int id;
 
 	private String statut;
 
@@ -36,20 +37,20 @@ public class Panier implements Serializable {
 	public Panier() {
 	}
 
-	public Date getDateCreation() {
-		return this.dateCreation;
-	}
-
-	public void setDateCreation(Date dateCreation) {
-		this.dateCreation = dateCreation;
-	}
-
 	public int getId() {
 		return this.id;
 	}
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Date getDateCreation() {
+		return this.dateCreation;
+	}
+
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
 	public String getStatut() {

@@ -2,7 +2,6 @@ package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -15,13 +14,20 @@ public class Photo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String chemin;
 
-	//bi-directional many-to-one association to PiecePhoto
-	@OneToMany(mappedBy="photo")
-	private List<PiecePhoto> piecePhotos;
+	//bi-directional many-to-one association to Festival
+	@ManyToOne
+	@JoinColumn(name="id_festival")
+	private Festival festival;
+
+	//bi-directional many-to-one association to Piece
+	@ManyToOne
+	@JoinColumn(name="id_piece")
+	private Piece piece;
 
 	public Photo() {
 	}
@@ -42,26 +48,20 @@ public class Photo implements Serializable {
 		this.chemin = chemin;
 	}
 
-	public List<PiecePhoto> getPiecePhotos() {
-		return this.piecePhotos;
+	public Festival getFestival() {
+		return this.festival;
 	}
 
-	public void setPiecePhotos(List<PiecePhoto> piecePhotos) {
-		this.piecePhotos = piecePhotos;
+	public void setFestival(Festival festival) {
+		this.festival = festival;
 	}
 
-	public PiecePhoto addPiecePhoto(PiecePhoto piecePhoto) {
-		getPiecePhotos().add(piecePhoto);
-		piecePhoto.setPhoto(this);
-
-		return piecePhoto;
+	public Piece getPiece() {
+		return this.piece;
 	}
 
-	public PiecePhoto removePiecePhoto(PiecePhoto piecePhoto) {
-		getPiecePhotos().remove(piecePhoto);
-		piecePhoto.setPhoto(null);
-
-		return piecePhoto;
+	public void setPiece(Piece piece) {
+		this.piece = piece;
 	}
 
 }

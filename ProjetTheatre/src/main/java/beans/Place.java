@@ -2,7 +2,6 @@ package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
 
 
 /**
@@ -15,6 +14,7 @@ public class Place implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private byte disponible;
@@ -26,10 +26,6 @@ public class Place implements Serializable {
 	private byte reserve;
 
 	private int type;
-
-	//bi-directional many-to-one association to BilletPlace
-	@OneToMany(mappedBy="place")
-	private List<BilletPlace> billetPlaces;
 
 	public Place() {
 	}
@@ -80,28 +76,6 @@ public class Place implements Serializable {
 
 	public void setType(int type) {
 		this.type = type;
-	}
-
-	public List<BilletPlace> getBilletPlaces() {
-		return this.billetPlaces;
-	}
-
-	public void setBilletPlaces(List<BilletPlace> billetPlaces) {
-		this.billetPlaces = billetPlaces;
-	}
-
-	public BilletPlace addBilletPlace(BilletPlace billetPlace) {
-		getBilletPlaces().add(billetPlace);
-		billetPlace.setPlace(this);
-
-		return billetPlace;
-	}
-
-	public BilletPlace removeBilletPlace(BilletPlace billetPlace) {
-		getBilletPlaces().remove(billetPlace);
-		billetPlace.setPlace(null);
-
-		return billetPlace;
 	}
 
 }

@@ -15,40 +15,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-import beans.Comedien;
-import beans.Personne;
-import beans.Role;
-import ejbs.GestionComediens;
-import ejbs.GestionPersonnes;
-import ejbs.GestionPieces;
-import ejbs.GestionRoles;
-import ejbs.GestionUtilisateurs;
+import beans.Organisateur;
+import beans.Sponsor;
+import ejbs.GestionFestivals;
+import ejbs.GestionOrganisateurs;
+import ejbs.GestionSponsors;
 
 /**
- * Servlet implementation class CreatePieceServlet
+ * Servlet implementation class CreateFestivalServlet
  */
-@WebServlet("/piece/create")
+@WebServlet("/festival/create")
 @MultipartConfig
-public class CreatePieceServlet extends HttpServlet {
+public class CreateFestivalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
 	@EJB
-	GestionComediens gestionComediens;	
+	GestionOrganisateurs gestionOrganisateurs;	
 
 	@EJB
-	GestionPersonnes gestionPersonnes;	
-
-	@EJB
-	GestionPieces gestionPieces;
+	GestionSponsors gestionSponsors;	
 	
 	@EJB
-	GestionRoles gestionRoles;
+	GestionFestivals gestionFestivals;
 	
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreatePieceServlet() {
+    public CreateFestivalServlet() {
         super();
     }
 
@@ -56,27 +50,28 @@ public class CreatePieceServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Comedien> comediens = gestionComediens.findAll();
-		List<Role> roles = gestionRoles.findAll();
-		List<Personne> personnes = gestionPersonnes.findAll();
-		request.setAttribute("comediens", comediens);
-		request.setAttribute("personnes", personnes);
-		request.setAttribute("roles", roles);
-		request.setAttribute("pageName", "Création pièce de théâtre");
-		getServletContext().getRequestDispatcher("/pages/PieceForm.jsp").forward(request, response);     
+		List<Organisateur> organisateurs = gestionOrganisateurs.findAll();
+		List<Sponsor> sponsors = gestionSponsors.findAll();
+		request.setAttribute("organisateurs", organisateurs);
+		request.setAttribute("sponsors", sponsors);
+		request.setAttribute("pageName", "Création festival");
+		getServletContext().getRequestDispatcher("/pages/FestivalForm.jsp").forward(request, response);     
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
-		List<Part> photos = request.getParts()
+    	String uploadPath = getServletContext().getRealPath("") + File.separator + "images";
+    	List<Part> photos = request.getParts()
 	    		.stream()
 	    		.filter(part -> "photos".equals(part.getName()) && part.getSize() > 0)
 	    		.collect(Collectors.toList());
 		Map<String, String[]> formValues = request.getParameterMap();
-		gestionPieces.create(formValues, photos, uploadPath);
+		gestionFestivals.create(formValues, photos, uploadPath);
+		
+		
+
 		doGet(request, response);
 	}
 

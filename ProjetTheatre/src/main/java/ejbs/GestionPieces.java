@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -13,11 +14,13 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.Part;
 
 import beans.Comedien;
 import beans.ComedienPiece;
 import beans.EquipeTechnique;
 import beans.Personne;
+import beans.Photo;
 import beans.Piece;
 import beans.Role;
 
@@ -32,6 +35,9 @@ public class GestionPieces {
 	
 	@PersistenceUnit
     private EntityManagerFactory emf;
+	
+	@EJB
+	GestionPhotos gestionPhotos;
 	
 	private EntityManager em;
     /**
@@ -66,7 +72,7 @@ public class GestionPieces {
     	return equipeTechnique;
     }
     
-    public Piece create(Map<String, String[]> formValues) {
+    public Piece create(Map<String, String[]> formValues, List<Part> photos,  String uploadPath) {
     	em = emf.createEntityManager();
     	EntityTransaction et = em.getTransaction();
     	
@@ -79,11 +85,19 @@ public class GestionPieces {
     	List<EquipeTechnique> equipeTechnique = createEquipeTechnique(newPiece, formValues.get("personnes"), formValues.get("rolesPersonnes"));
     	newPiece.setComedienPieces(comediensPiece);
     	newPiece.setEquipeTechniques(equipeTechnique);
+    	
+    	List<Photo> newPhotos = gestionPhotos.savePhotos(photos, uploadPath);
+    	newPhotos.stream().forEach(photo -> photo.setPiece(newPiece));
+    	newPiece.setPhotos(newPhotos);
 
     	et.begin();
     	em.persist(newPiece);
     	et.commit();
     	return newPiece;
+    }
+    
+    public Piece findOne(int id) {
+    	return emf.createEntityManager().find(Piece.class, id);
     }
 
 }
