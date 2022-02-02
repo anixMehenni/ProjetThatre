@@ -1,11 +1,10 @@
 $(document).ready(function(){
-	$("#addComedienBtn").on("click", function() {
+	$("#addOrganisateurBtn").on("click", function() {
 		form = $(this).prev().clone();
-		form.find("input").val("");
 		form.insertBefore(this);
 	});
 	
-	$("#addEquipeTechniqueBtn").on("click", function() {
+	$("#addSponsorBtn").on("click", function() {
 	  	form = $(this).prev().clone();
 		form.insertBefore(this);
 	});

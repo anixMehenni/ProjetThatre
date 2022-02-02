@@ -2,73 +2,100 @@
 <%@page import="beans.Sponsor"%>
 
 <%@ include file="./shared/Header.jsp" %>
-	<h1>Création Festival </h1>
-	<img src="/assets/ccf-dedup.PNG"/>
-	<form method="POST" enctype="multipart/form-data">
-		<label for="nom">Photos :</label>
-		<br>
-		<input type="file" name="photos" multiple="true" />
-		<br>
-		
-		<label for="nom">Nom :</label>
-		<br>
-  		<input type="text" id="nom" name="nom">
-  		<br>
-  		
-  		<label for="ville">Ville :</label>
-		<br>
-  		<input type="text" id="ville" name="ville">
-  		<br>
-  		
-		<label for="description">Description :</label>
-		<br>
-		<textarea id="description" name="description" rows="5" cols="33"></textarea>
-  		<br>
-  		
-  		<label for="dateDebut">Date Debut :</label>
-		<br>
-		<input type="date" id="dateDebut" name="dateDebut"/>
-  		<br>
-  		
-  		<label for="dateFin">Date Fin :</label>
-		<br>
-		<input type="date" id="dateFin" name="dateFin"/>
-  		<br>
-  		
-  		<label for="organisateurs">Organisateurs :</label>
-		<br>
-		<select name="organisateurs">
-			<option value=""></option>
-			<% for (Organisateur organisateur: (ArrayList<Organisateur>) request.getAttribute("organisateurs")) { %>
-				<option value="<%= organisateur.getId() %>"><%= organisateur.getNom() %></option>
-			<% } %>
-		</select>
-		<br>
-		<select name="organisateurs">
-			<option value=""></option>
-			<% for (Organisateur organisateur: (ArrayList<Organisateur>) request.getAttribute("organisateurs")) { %>
-				<option value="<%= organisateur.getId() %>"><%= organisateur.getNom() %></option>
-			<% } %>
-		</select>
-		<br>
-  				
-		<label for="sponsors">Sponsors :</label>
-		<br>
-		<select name="sponsors">
-			<option value=""></option>
-			<% for (Sponsor sponsor: (ArrayList<Sponsor>) request.getAttribute("sponsors")) { %>
-				<option value="<%= sponsor.getId() %>"><%= sponsor.getNom() %></option>
-			<% } %>
-		</select>
-		<br>
-		<select name="sponsors">
-			<option value=""></option>
-			<% for (Sponsor sponsor: (ArrayList<Sponsor>) request.getAttribute("sponsors")) { %>
-				<option value="<%= sponsor.getId() %>"><%= sponsor.getNom() %></option>
-			<% } %>
-		</select>
-		
-		
-		<button type="submit">Créer</button>
-	</form>
+	<div class="container">	
+		<h3 class="text-center my-5">Création festival</h3>
+	
+		<form method="POST" enctype="multipart/form-data">
+			<div class="row">
+				<div class="col">
+					<div class="form-group">
+					    <label for="nom">Nom</label>
+					    <input type="text" class="form-control" id="nom" name="nom">
+				    </div>
+				    
+				    <div class="form-group">
+					    <label for="ville">Ville</label>
+					    <input type="text" class="form-control" id="ville" name="ville">
+				    </div>
+				    
+				    <div class="form-group">
+					    <label for="description">Déscription</label>
+					    <textarea class="form-control" id="description" rows="5" name="description"></textarea>
+					</div>
+					
+					<div class="row">
+						<div class="col">
+							<div class="form-group">
+							    <label for="dateDebut">Début</label>
+							    <input type="date" class="form-control" id="dateDebut" name="dateDebut">
+						    </div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+							    <label for="dateFin">Fin</label>
+							    <input type="date" class="form-control" id="dateFin" name="dateFin">
+						    </div>
+						</div>			
+					</div>
+					
+					<div class="form-group">
+					    <label for="photos">Photos</label>
+					    <input type="file" class="form-control-file" id="photos" name="photos" multiple="true">
+					</div>
+				</div>
+				
+				<div class="col" id="rightSide">
+						<div class="mb-5">			
+							<label for="organisateurs">Organisateurs</label>	
+							
+							<div class="row my-2">
+								<div class="col">
+									<select name="organisateurs" class="form-control">
+								        <option value=""></option>
+										<% for (Organisateur organisateur: (ArrayList<Organisateur>) request.getAttribute("organisateurs")) { %>
+											<option value="<%= organisateur.getId() %>"><%= organisateur.getNom() %></option>
+										<% } %>
+								    </select>						    
+								</div>
+								<div class="col-1">										
+									<button type="button" class="btn btn-outline-danger" data-target="organisateurs">-</button>
+								</div>
+							</div>
+							
+							<div class="row justify-content-center mt-3" id="addOrganisateurBtn">			
+								<button type="button" class="btn btn-outline-primary">+</button>
+							</div>	
+						</div>
+						
+						<div>					
+							<label for="sponsors">Sponsors</label>	
+							
+							<div class="row my-2">
+								<div class="col">
+									<select name="sponsors" class="form-control">
+								        <option value=""></option>
+										<% for (Sponsor sponsor: (ArrayList<Sponsor>) request.getAttribute("sponsors")) { %>
+											<option value="<%= sponsor.getId() %>"><%= sponsor.getNom() %></option>
+										<% } %>
+								    </select>						    
+								</div>
+								<div class="col-1">										
+									<button type="button" class="btn btn-outline-danger" data-target="sponsors">-</button>
+								</div>
+							</div>
+							
+							<div class="row justify-content-center mt-3" id="addSponsorBtn">			
+								<button type="button" class="btn btn-outline-primary">+</button>
+							</div>
+						</div>
+					</div>			
+			</div>
+			
+			<div class="row justify-content-center my-3">			
+				<button type="submit" class="btn btn-primary">Créer</button>
+			</div>
+		</form>
+	</div>
+<script type="text/javascript" src="/ProjetTheatre/js/festivalForm.js"></script>
+
 <%@ include file="./shared/Footer.jsp" %>
