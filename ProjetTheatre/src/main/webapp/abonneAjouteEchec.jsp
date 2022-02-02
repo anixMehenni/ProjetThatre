@@ -11,8 +11,8 @@
 <body>
         <table style="width: 20%">
         <tr><td>
-<a>Welcome user, you have logged in.</a></td></tr>
-<tr></tr><tr><td></td><td><a href="login.jsp"><b>Logout</b></a></td></tr>
+<a>Adresse email existe déjà !</a></td></tr>
+<tr><td><a href="login.jsp"><b>Retour page connexion</b></a></td></tr>
 </table>
 </body>
 </html>

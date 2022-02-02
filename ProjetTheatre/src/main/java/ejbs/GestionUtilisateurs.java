@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,6 +15,7 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.Query;
 
@@ -37,36 +40,47 @@ public class GestionUtilisateurs {
         // TODO Auto-generated constructor stub
     }
     
-    public void ajouterNouveauAbonne (String nom, String prenom, 
-    		String email, String motDePasse, String telephone, String adresse){
-    	try{EntityManager em = emf.createEntityManager();
+    public int ajouterNouveauAbonne (String nom, String prenom, 
+    		String email, String motDePasse, String telephone, String adresse) throws NoResultException{
+    	EntityManager em = emf.createEntityManager();
     	EntityTransaction et = em.getTransaction();
     	
-    	Utilisateur newAbonne = new Utilisateur();
-    	newAbonne.setNom(nom);
-    	newAbonne.setPrenom(prenom);
-    	newAbonne.setEmail(email);
-    	newAbonne.setMotDePasse(motDePasse);
-    	newAbonne.setAdresse(adresse);
-    	newAbonne.setTelephone(telephone);
-    	newAbonne.setDateCreation(new Date());
+    	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
+        List <Utilisateur> resultatQuery = query.getResultList();
+        
+        boolean exist = true;
+		
+        System.out.print(resultatQuery.isEmpty());
+        
+        if (exist == false) {
+        	Utilisateur newAbonne = new Utilisateur();
+        	newAbonne.setNom(nom);
+        	newAbonne.setPrenom(prenom);
+        	newAbonne.setEmail(email);
+        	newAbonne.setMotDePasse(motDePasse);
+        	newAbonne.setAdresse(adresse);
+        	newAbonne.setTelephone(telephone);
+        	newAbonne.setDateCreation(new Date());
+        	
+        	newAbonne.setRole("ABONNE");
+        	
+        	et.begin();
+        	em.persist(newAbonne);
+        	et.commit();
+        	return 1;
+        }else {
+        	return 0;
+        }
     	
-    	newAbonne.setRole("ABONNE");
-    	
-    	et.begin();
-    	em.persist(newAbonne);
-    	et.commit();}
-    	catch (Exception e) {
-    		e.printStackTrace();
-    	}
     	
     }
     
-    public Utilisateur seConnecter (String email, String motDePasse){
+    public Utilisateur seConnecter (String email, String motDePasse) throws NoResultException{
     		EntityManager em = emf.createEntityManager();
             Query query = em
-                    .createQuery("SELECT u FROM Utilisateur as u where u.email like :email");
+                    .createQuery("SELECT u FROM Utilisateur as u where u.email like :email and u.motDePasse like :motDePasse");
             query.setParameter("email", email);
+            query.setParameter("motDePasse", motDePasse);
             Utilisateur resultatQuery = (Utilisateur) query.getSingleResult();
             
             Utilisateur currentUser = new Utilisateur();
@@ -74,11 +88,7 @@ public class GestionUtilisateurs {
             currentUser.setAdresse(resultatQuery.getAdresse());
             currentUser.setActif(resultatQuery.getActif());
             
-            
-            if (resultatQuery.getMotDePasse() == motDePasse) {
-            	return currentUser;
-            }
-            return currentUser;
+            return resultatQuery;
 
     	
     }

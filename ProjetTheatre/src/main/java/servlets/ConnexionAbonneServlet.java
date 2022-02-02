@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -65,8 +66,14 @@ public class ConnexionAbonneServlet extends HttpServlet {
                  getServletContext().getRequestDispatcher("/connexionReussie.jsp")
                          .forward(request, response);
              
-		     }catch (Exception e) {
-                 e.printStackTrace();
+		     }catch (NoResultException e) {
+		    	 getServletContext().getRequestDispatcher("/connexionEchouee.jsp")
+                 .forward(request, response);
+             }
+		
+			catch (Exception e) {
+				getServletContext().getRequestDispatcher("/connexionEchouee.jsp")
+                .forward(request, response);
              }
         }
 	
