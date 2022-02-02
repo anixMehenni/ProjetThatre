@@ -2,6 +2,8 @@ package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -65,7 +67,7 @@ public class Festival implements Serializable {
 	private List<Sponsor> sponsors;
 
 	//bi-directional many-to-one association to Photo
-	@OneToMany(mappedBy="festival")
+	@OneToMany(mappedBy="festival", cascade=CascadeType.ALL)
 	private List<Photo> photos;
 
 	//bi-directional many-to-one association to Representation

@@ -4,7 +4,12 @@
 
 <%@ include file="./shared/Header.jsp" %>
 	<h1>Création pièce de théâtre </h1>
-	<form method="POST">
+	<form method="POST" enctype="multipart/form-data">
+		<label for="nom">Photos :</label>
+		<br>
+		<input type="file" name="photos" multiple="true" />
+		<br>
+		
 		<label for="nom">Nom :</label>
 		<br>
   		<input type="text" id="nom" name="nom">

@@ -1,12 +1,17 @@
 package ejbs;
 
+import java.io.File;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionManagement;
@@ -15,8 +20,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import javax.servlet.http.Part;
+
 import beans.Festival;
 import beans.Organisateur;
+import beans.Photo;
 import beans.Sponsor;
 
 /**
@@ -31,6 +39,9 @@ public class GestionFestivals {
 	@PersistenceUnit
     private EntityManagerFactory emf;
 	
+	@EJB
+	GestionPhotos gestionPhotos;	
+	
 	private EntityManager em;
     /**
      * Default constructor. 
@@ -38,7 +49,7 @@ public class GestionFestivals {
     public GestionFestivals() {
     }
     
-    public Festival create(Map<String, String[]> formValues) {
+    public Festival create(Map<String, String[]> formValues, List<Part> photos,  String uploadPath) {
     	Festival newFestival = new Festival();
     	try {
 	    	em = emf.createEntityManager();
@@ -57,15 +68,21 @@ public class GestionFestivals {
 	    	List<Organisateur> organisateurs = Arrays.stream(formValues.get("organisateurs"))
 	    		.map(organisateurId -> em.getReference(Organisateur.class, Integer.parseInt(organisateurId)))
 	    		.collect(Collectors.toList());
-	    	
+
 	    	newFestival.setSponsors(sponsors);
 	    	newFestival.setOrganisateurs(organisateurs);
+	    	
+	    	List<Photo> newPhotos = gestionPhotos.savePhotos(photos, uploadPath);
+	    	newPhotos.stream().forEach(photo -> photo.setFestival(newFestival));
+    		newFestival.setPhotos(newPhotos);
 	
 	    	et.begin();
 	    	em.persist(newFestival);
 	    	et.commit();
 	    	
-    	} catch(Exception e) {	}
+    	} catch(Exception e) {	
+    		
+    	}
 
 		return newFestival;
     }

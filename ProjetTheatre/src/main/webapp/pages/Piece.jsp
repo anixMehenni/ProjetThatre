@@ -3,6 +3,7 @@
 <%@page import="beans.EquipeTechnique"%>
 <%@page import="beans.Piece"%>
 <%@page import="beans.Representation"%>
+<%@page import="beans.Photo"%>
 
 <% 
 	java.text.DateFormat df = new java.text.SimpleDateFormat("EEEE dd MM YYYY"); 
@@ -11,6 +12,10 @@
 
 <%@ include file="./shared/Header.jsp" %>
 	<% Piece piece = (Piece) request.getAttribute("piece"); %>
+	
+	<% for (Photo photo: piece.getPhotos()) { %>
+		<img src="<%= photo.getChemin() %>" alt="photos"/>
+	<% } %>
 	
 	<h1><%= piece.getNom() %></h1>
 	<h5>Ecrit par <%= piece.getAuteur() %></h5>		
