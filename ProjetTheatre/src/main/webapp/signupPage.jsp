@@ -17,7 +17,13 @@
 <title>Inscription | Nouveau compte abonné</title>
 
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<!-- Header styling --> 
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
 
+<link
+      rel="stylesheet"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+    />
 <!-- Style -->
 <link rel="stylesheet" href="/ProjetTheatre/css/loginStyle.css">
 

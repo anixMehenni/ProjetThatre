@@ -44,16 +44,24 @@ public class CreationCompteAbonneServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nom = request.getParameter("nom");
-        String prenom = request.getParameter("prenom");
-        String email = request.getParameter("email");
-        String motDePasse = request.getParameter("motDePasse");
-        String telephone = request.getParameter("telephone");
-        String adresse = request.getParameter("adresse");
-        
-        gestionUtilisateurs.ajouterNouveauAbonne(nom, prenom, email, motDePasse, telephone, adresse);
-                         
-        getServletContext().getRequestDispatcher("/compteAjoute.jsp").forward(request, response);
+		try {
+			String nom = request.getParameter("nom");
+	        String prenom = request.getParameter("prenom");
+	        String email = request.getParameter("email");
+	        String motDePasse = request.getParameter("motDePasse");
+	        String telephone = request.getParameter("telephone");
+	        String adresse = request.getParameter("adresse");
+	        
+	        int resultat = gestionUtilisateurs.ajouterNouveauAbonne(nom, prenom, email, motDePasse, telephone, adresse);
+	        
+	        if (resultat == 1) {
+	        getServletContext().getRequestDispatcher("/abonneAjouteSucces.jsp").forward(request, response);
+	        }else {
+	        	getServletContext().getRequestDispatcher("/abonneAjouteEchec.jsp").forward(request, response);
+	        }
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 }
 	}
 

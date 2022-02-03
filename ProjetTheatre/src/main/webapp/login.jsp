@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html"%>
 
 <%@ include file="/pages/shared/Header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,13 @@
 <!-- Bootstrap Style 
 <link rel="stylesheet" href="/ProjetTheatre/src/main/webapp/css/bootstrap.min.css">-->
 
+<!-- Header styling --> 
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
+
+<link
+      rel="stylesheet"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+    />
 <!-- Style -->
 <link rel="stylesheet" href="/ProjetTheatre/css/loginStyle.css">
 

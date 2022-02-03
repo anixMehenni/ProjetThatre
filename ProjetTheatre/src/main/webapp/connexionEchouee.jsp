@@ -34,11 +34,10 @@
 
         
         <tr><td>
-<tr><td><%=currentUser.getPrenom()%></td></tr>
-
+<tr><td>Email et/ou mot de passe erroné</td></tr>
 
 				
-<tr></tr><tr><td></td><td><a href="login.jsp"><b>Logout</b></a></td></tr>
+<tr><td><a href="login.jsp"><b>Veuillez réessayer</b></a></td></tr>
 </table>
 </body>
 </html>
