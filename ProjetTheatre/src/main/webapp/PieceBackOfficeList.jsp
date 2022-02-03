@@ -47,10 +47,12 @@
 							%>
 						</td>
 						<td class="text-center"><%= df.format(piece.getDateCreation()) %></td>						
-						<td class="text-right">
-							<button class="btn btn-outline-primary">
-								+ Représentation
-							</button>
+						<td class="text-right">							
+							<a href="/ProjetTheatre/representation/add?piece=<%= piece.getId() %>">
+								<button class="btn btn-outline-primary">
+									+ Représentation
+								</button>
+							</a>
 							<a href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
 								<button class="btn btn-outline-info">
 									Voir
