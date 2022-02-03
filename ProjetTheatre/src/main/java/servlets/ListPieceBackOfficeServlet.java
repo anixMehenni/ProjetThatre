@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -13,10 +14,10 @@ import beans.Piece;
 import ejbs.GestionPieces;
 
 /**
- * Servlet implementation class ViewPiece
+ * Servlet implementation class ListPieceBackOfficeServlet
  */
-@WebServlet("/piece/view")
-public class ViewPiece extends HttpServlet {
+@WebServlet("/bo/piece")
+public class ListPieceBackOfficeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@EJB
@@ -24,19 +25,19 @@ public class ViewPiece extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ViewPiece() {
+    public ListPieceBackOfficeServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer id = Integer.parseInt(request.getParameter("id"));
-		Piece piece = gestionPieces.findOne(id);
-		request.setAttribute("piece", piece);
-		request.setAttribute("pageName", piece.getNom());
-		getServletContext().getRequestDispatcher("/Piece.jsp").forward(request, response);     
+		List<Piece> pieces = gestionPieces.findAll();
+		request.setAttribute("pieces", pieces);
+		request.setAttribute("pageName", "Pièces");
+		getServletContext().getRequestDispatcher("/PieceBackOfficeList.jsp").forward(request, response); 
 	}
 
 }
