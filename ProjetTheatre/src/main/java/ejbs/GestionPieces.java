@@ -96,6 +96,12 @@ public class GestionPieces {
     	return newPiece;
     }
     
+    public List<Piece> findAll() {
+    	EntityManager em = emf.createEntityManager();
+    	TypedQuery<Piece> query = em.createQuery("from Piece", Piece.class);
+    	return query.getResultList();
+    }
+    
     public Piece findOne(int id) {
     	return emf.createEntityManager().find(Piece.class, id);
     }
