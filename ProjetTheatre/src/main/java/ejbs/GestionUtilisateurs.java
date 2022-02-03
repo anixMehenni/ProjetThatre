@@ -47,10 +47,22 @@ public class GestionUtilisateurs {
     	
     	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
         List <Utilisateur> resultatQuery = query.getResultList();
-        
-        boolean exist = true;
+        ArrayList <Utilisateur> users = new ArrayList <Utilisateur>();
+        boolean exist = false;
 		
-        System.out.print(resultatQuery.isEmpty());
+        for(Utilisateur user : resultatQuery) {
+        	Utilisateur u = new Utilisateur();
+        	u.setId(user.getId());
+        	u.setEmail(user.getEmail());
+        	u.setMotDePasse(user.getAdresse());
+        	
+        	users.add(u);
+        }
+        
+        for(Utilisateur user : users) {
+        System.out.print(user.getEmail());
+        if(user.getEmail().equals(email)) {exist = true;}
+        }
         
         if (exist == false) {
         	Utilisateur newAbonne = new Utilisateur();
