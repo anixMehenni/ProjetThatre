@@ -20,6 +20,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.Part;
 
 import beans.Festival;
@@ -85,6 +86,12 @@ public class GestionFestivals {
     	}
 
 		return newFestival;
+    }
+    
+    public List<Festival> findAll() {
+    	EntityManager em = emf.createEntityManager();
+    	TypedQuery<Festival> query = em.createQuery("from Festival", Festival.class);
+    	return query.getResultList();
     }
 
 }
