@@ -13,7 +13,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-- Header styling --> 
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
 
+<link
+      rel="stylesheet"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+    />
 <meta charset="ISO-8859-1">
 <title>Connexion réussie </title>
 </head>
