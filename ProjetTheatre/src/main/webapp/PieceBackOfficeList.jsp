@@ -1,5 +1,5 @@
 <%@page import="beans.Piece"%>
-
+<%@page import="beans.Commentaire"%>
 
 <%
 	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/M/YYYY"); 
@@ -22,12 +22,14 @@
 		<table class="table table-striped">
 			<thead>
 			    <tr>
-			      <th scope="col">Nom</th>
-			      <th scope="col">Auteur</th>			      
-			      <th scope="col">Représentations</th>			          
-			      <th scope="col">Commentaires</th>			          
-			      <th scope="col">Note</th>
-			      <th scope="col">Date de création</th>
+			      <th class="text-center" scope="col">Nom</th>
+			      <th class="text-center" scope="col">Auteur</th>			      
+			      <th class="text-center" scope="col">Représentations</th>			          
+			      <th class="text-center" scope="col">Commentaires validés</th>				          
+			      <th class="text-center" scope="col">Commentaires à valider</th>			          
+			      <th class="text-center" scope="col">Commentaires rejetés</th>				          
+			      <th class="text-center" scope="col">Note</th>
+			      <th class="text-center" scope="col">Date de création</th>
 			      <th class="text-right" scope="col">Actions</th>
 			    </tr>
 		    </thead>
@@ -37,15 +39,23 @@
 						<td><%= piece.getNom() %></td>
 						<td><%= piece.getAuteur() %></td>
 						<td class="text-center"><%= piece.getRepresentations().size() %></td>
-						<td class="text-center"><%= piece.getCommentaires().size() %></td>						
-						<td class="text-center">
-							<%= piece.getCommentaires()
-								.stream()
-								.mapToDouble(c -> c.getNote())
-								.average()
-								.orElse(0)
-							%>
+						
+						<% 
+							int commentairesAValider = piece.getCommentaires(Commentaire.StatutEnum.CREE).size();
+							int commentairesValides = piece.getCommentaires(Commentaire.StatutEnum.VALIDE).size();
+							int commentairesRejetes = piece.getCommentaires(Commentaire.StatutEnum.REJETE).size();
+						%>
+						<td class="text-center text-success">
+							<%= commentairesValides %>
 						</td>
+						<td class="text-center text-warning">
+							<%= commentairesAValider %>
+						</td>	
+						
+						<td class="text-center text-danger">
+							<%= commentairesRejetes %>
+						</td>					
+						<td class="text-center"><%= piece.getMoyenne()%></td>
 						<td class="text-center"><%= df.format(piece.getDateCreation()) %></td>						
 						<td class="text-right">							
 							<a href="/ProjetTheatre/representation/add?piece=<%= piece.getId() %>">
