@@ -23,9 +23,10 @@
     />
 </head>
 <body>
-	<% Piece piece = (Piece) request.getAttribute("piece"); %>
-	
-	
+	<% 
+		Piece piece = (Piece) request.getAttribute("piece");
+		List<Commentaire> visibleCommentaires = piece.getCommentaires(Commentaire.StatutEnum.VALIDE);
+	%>
 	
 	<div class="container-fluid p-0">
 		<div class="row no-gutters align-items-center min-vh-80">
@@ -40,6 +41,11 @@
 			<div class="col d-flex flex-column justify-content-center align-items-center p-5">				
 				<h1 class="display-4 text-center font-weight-bold"><%= piece.getNom() %></h1>
 				<h3>par <span><%= piece.getAuteur() %></span></h3>
+				<% if (visibleCommentaires.size() > 0) { %>
+					<h6 class="font-italic font-weight-light">
+						<%= piece.getMoyenne() %> / 10 sur <%= visibleCommentaires.size() %> avis
+					</h6>	
+				<% } %>
 				
 				<h4 class="mt-5">Résumé</h4>
 				<p class="lead text-justify"><%= piece.getDescription() %></p>
@@ -105,14 +111,15 @@
 		</div>
 		<div class="row p-5 justify-content-center">
 			<div class="col-6">
-				<h3 class="text-center font-weight-bold mb-5">Avis spectateurs</h3>
+				<h3 class="text-center font-weight-bold mb-5">
+					Avis spectateurs <%= visibleCommentaires.size() > 0 ? "(" + visibleCommentaires.size() + ")" : "" %>					
+				</h3>
+				
+				<%@ include file="/CommentaireForm.jsp" %>
+				
 				<div>
-					<% 
-						List<Commentaire> visibleCommentaires = piece.getCommentaires()
-							.stream()
-							.filter(commentaire -> Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == Commentaire.StatutEnum.VALIDE)
-							.collect(Collectors.toList());
-						for (Commentaire commentaire : visibleCommentaires) {
+					<% if (visibleCommentaires.size() > 0) {
+							for (Commentaire commentaire : visibleCommentaires) {
 					%>
 						<div class="d-flex flex-column my-3">
 							<div class="font-weight-bold">
@@ -121,12 +128,19 @@
 							<p><p><%= commentaire.getCommentaire() %></p>
 							<div class="font-italic">
 								par 
-								<%= commentaire.getUtilisateur().getNom() %>
-								<%= commentaire.getUtilisateur().getPrenom() %>
+								<%= commentaire.getUtilisateur() != null 
+									? commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom()
+									: "Anonyme"
+								%>
 							</div>
 						</div>
 						<hr/>
-					<% } %>
+					
+					<% 	}
+					} else {
+					%>
+						<h6 class="font-italic font-weight-light text-center">Pas encore d'avis reçu</h6>
+					<% } %>	
 				</div>
 			</div>
 		</div>

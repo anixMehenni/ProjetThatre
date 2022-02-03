@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -115,6 +116,22 @@ public class Piece implements Serializable {
 		return comedienPiece;
 	}
 
+	public double getMoyenne() {
+		return this.commentaires
+				.stream()
+				.filter(commentaire -> Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == Commentaire.StatutEnum.VALIDE)
+				.mapToDouble(commentaire -> commentaire.getNote())
+				.average()
+				.orElse(0);
+	}
+	
+	public List<Commentaire> getCommentaires(Commentaire.StatutEnum statut) {
+		return this.commentaires
+				.stream()
+				.filter(commentaire -> Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == statut)
+				.collect(Collectors.toList());
+	}
+	
 	public List<Commentaire> getCommentaires() {
 		return this.commentaires;
 	}
