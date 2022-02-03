@@ -35,7 +35,8 @@ public class ViewPiece extends HttpServlet {
 		Integer id = Integer.parseInt(request.getParameter("id"));
 		Piece piece = gestionPieces.findOne(id);
 		request.setAttribute("piece", piece);
-		getServletContext().getRequestDispatcher("/pages/Piece.jsp").forward(request, response);     
+		request.setAttribute("pageName", piece.getNom());
+		getServletContext().getRequestDispatcher("/Piece.jsp").forward(request, response);     
 	}
 
 }

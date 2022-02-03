@@ -26,7 +26,7 @@
 
 <body>
 	<div class="container">
-		<h3 class="text-center my-5">Création pièce de théâtre </h3>
+		<h3 class="text-center display-4 my-5">Création pièce de théâtre </h3>
 		
 		
 		<form method="POST" enctype="multipart/form-data">
