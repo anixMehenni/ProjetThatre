@@ -55,7 +55,7 @@ public class CreateFestivalServlet extends HttpServlet {
 		request.setAttribute("organisateurs", organisateurs);
 		request.setAttribute("sponsors", sponsors);
 		request.setAttribute("pageName", "Création festival");
-		getServletContext().getRequestDispatcher("/pages/FestivalForm.jsp").forward(request, response);     
+		getServletContext().getRequestDispatcher("/FestivalForm.jsp").forward(request, response);     
 	}
 
 	/**

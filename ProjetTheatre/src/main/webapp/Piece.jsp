@@ -10,7 +10,19 @@
 	java.text.DateFormat hf = new java.text.SimpleDateFormat("k:m"); 
 %>
 
-<%@ include file="./shared/Header.jsp" %>
+<%@ include file="/pages/shared/Header.jsp" %>
+
+<head>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<!-- Header styling --> 
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
+
+<link
+      rel="stylesheet"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+    />
+</head>
+<body>
 	<% Piece piece = (Piece) request.getAttribute("piece"); %>
 	
 	<% for (Photo photo: piece.getPhotos()) { %>
@@ -72,5 +84,5 @@
 			<% } %>
 		</ul>
 	</div>
-
-<%@ include file="./shared/Footer.jsp" %>
+</body>
+<%@ include file="/pages/shared/Footer.jsp" %>

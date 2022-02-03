@@ -17,11 +17,11 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-<link href="../../css/headerStyle.css" rel="stylesheet" type="text/css" />
+<link href="../../ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
 
 <link
       rel="stylesheet"
-      href="../../css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+      href="../../ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
     />
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -30,7 +30,7 @@
 
 <title>${ !empty pageName ? pageName : 'Theatre JAVA' }</title>
 
-<script defer="" src="../../js/s.js"></script>
+<script defer="" src="../../ProjetTheatre/js/s.js"></script>
 
 <script>
       ;(function (w, d) {
@@ -77,7 +77,7 @@
 </head>
 <body>
 	<script type="text/javascript"
-		src="/ProjetTheatre/js/jquery-3.3.1.min.js"></script>
+		src="../../ProjetTheatre/js/jquery-3.3.1.min.js"></script>
 	<div class="container">
         <nav
           class="navbar navbar-expand-lg ftco_navbar ftco-navbar-light"
@@ -132,7 +132,7 @@
                 </li>
                 <li class="nav-item">
                   <a
-                    href="../../ConnexionAbonneServlet"
+                    href="../../ProjetTheatre/ConnexionAbonneServlet"
                     class="nav-link"
                     >Se connecter</a
                   >
@@ -186,8 +186,8 @@
           </div>
         </nav>
       </div>
-      <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-      <script src="../../js/popper.js+bootstrap.min.js+main.js.pagespeed.jc.5x6Uz2igdj.js"></script>
+      <script type="text/javascript" src="../../ProjetTheatre/js/jquery-3.3.1.min.js"></script>
+      <script src="../../ProjetTheatre/js/popper.js+bootstrap.min.js+main.js.pagespeed.jc.5x6Uz2igdj.js"></script>
       <script>
       eval(mod_pagespeed_0UPnXzZwRD)
     </script>

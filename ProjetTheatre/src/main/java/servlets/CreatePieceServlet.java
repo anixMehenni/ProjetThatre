@@ -63,7 +63,7 @@ public class CreatePieceServlet extends HttpServlet {
 		request.setAttribute("personnes", personnes);
 		request.setAttribute("roles", roles);
 		request.setAttribute("pageName", "Création pièce de théâtre");
-		getServletContext().getRequestDispatcher("/pages/PieceForm.jsp").forward(request, response);     
+		getServletContext().getRequestDispatcher("/PieceForm.jsp").forward(request, response);     
 	}
 
 	/**
