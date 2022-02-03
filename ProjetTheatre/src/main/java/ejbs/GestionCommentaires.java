@@ -1,6 +1,7 @@
 package ejbs;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -13,6 +14,8 @@ import javax.persistence.PersistenceUnit;
 import javax.persistence.TypedQuery;
 
 import beans.Commentaire;
+import beans.Piece;
+import beans.Utilisateur;
 
 /**
  * Session Bean implementation class GestionCommentaires
@@ -31,6 +34,23 @@ public class GestionCommentaires {
      * Default constructor. 
      */
     public GestionCommentaires() {
+    }
+    
+    public Commentaire add(Map<String, String[]> formValues, Utilisateur utilisateur) {
+    	EntityManager em = emf.createEntityManager();
+		Commentaire newCommentaire = new Commentaire();
+		newCommentaire.setNote(Short.parseShort(formValues.get("note")[0]));
+		newCommentaire.setCommentaire(formValues.get("commentaire")[0]);
+		newCommentaire.setPiece(em.getReference(Piece.class, Integer.parseInt(formValues.get("piece")[0])));
+		newCommentaire.setUtilisateur(utilisateur);
+		newCommentaire.setStatut(Commentaire.StatutEnum.CREE.toString());
+
+    	EntityTransaction et = em.getTransaction();
+    	et.begin();
+    	em.persist(newCommentaire);
+    	et.commit();
+    	
+		return newCommentaire;
     }
     
     public List<Commentaire> findAll() {

@@ -114,6 +114,9 @@
 				<h3 class="text-center font-weight-bold mb-5">
 					Avis spectateurs <%= visibleCommentaires.size() > 0 ? "(" + visibleCommentaires.size() + ")" : "" %>					
 				</h3>
+				
+				<%@ include file="/CommentaireForm.jsp" %>
+				
 				<div>
 					<% if (visibleCommentaires.size() > 0) {
 							for (Commentaire commentaire : visibleCommentaires) {
@@ -125,8 +128,10 @@
 							<p><p><%= commentaire.getCommentaire() %></p>
 							<div class="font-italic">
 								par 
-								<%= commentaire.getUtilisateur().getNom() %>
-								<%= commentaire.getUtilisateur().getPrenom() %>
+								<%= commentaire.getUtilisateur() != null 
+									? commentaire.getUtilisateur().getPrenom() + " " + commentaire.getUtilisateur().getNom()
+									: "Anonyme"
+								%>
 							</div>
 						</div>
 						<hr/>

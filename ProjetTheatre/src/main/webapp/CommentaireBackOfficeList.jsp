@@ -21,7 +21,12 @@
 				<% for (Commentaire commentaire : (List<Commentaire>) request.getAttribute("commentaires")) { %>
 					<tr scope="row">					
 						<td><%= commentaire.getPiece().getNom() %></td>
-						<td><%= commentaire.getUtilisateur().getNom() %></td>
+						<td>
+							<%= commentaire.getUtilisateur() != null
+								? commentaire.getUtilisateur().getNom() + " " + commentaire.getUtilisateur().getNom() 
+								: "Anonyme"
+							%>
+						</td>
 						<td class="<%= Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == Commentaire.StatutEnum.VALIDE 
 							? "text-success" : Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == Commentaire.StatutEnum.REJETE
 							? "text-danger"
