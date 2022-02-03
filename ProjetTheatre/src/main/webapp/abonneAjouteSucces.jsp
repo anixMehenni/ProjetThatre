@@ -3,7 +3,6 @@
     
     <%@ include file="/pages/shared/Header.jsp" %>
     
-    <%@ include file="/pages/shared/Header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>

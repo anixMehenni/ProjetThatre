@@ -47,11 +47,22 @@ public class GestionUtilisateurs {
     	
     	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
         List <Utilisateur> resultatQuery = query.getResultList();
+        ArrayList<Utilisateur>  users = new ArrayList<Utilisateur>();
         
-        boolean exist = true;
-		
-        System.out.print(resultatQuery.isEmpty());
+        for(Utilisateur user : resultatQuery) {
+        	Utilisateur u = new Utilisateur();
+        	u.setId(user.getId());
+        	u.setEmail(user.getEmail());
+        	u.setMotDePasse(user.getMotDePasse());
+        	users.add(u);
+        }
         
+        boolean exist = false;
+        
+        for(Utilisateur user : users) {
+        	if(user.getEmail().equals(email)) {exist = true;}
+        }
+		        
         if (exist == false) {
         	Utilisateur newAbonne = new Utilisateur();
         	newAbonne.setNom(nom);
@@ -73,6 +84,53 @@ public class GestionUtilisateurs {
         }
     	
     	
+    }
+    
+    public int ajouterNouveauModerateur (String nom, String prenom, 
+    		String email, String motDePasse, String telephone, String adresse,String role) throws NoResultException{
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction et = em.getTransaction();
+    	
+    	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
+        List <Utilisateur> resultatQuery = query.getResultList();
+        ArrayList<Utilisateur>  users = new ArrayList<Utilisateur>();
+        
+        for(Utilisateur user : resultatQuery) {
+        	Utilisateur u = new Utilisateur();
+        	u.setId(user.getId());
+        	u.setEmail(user.getEmail());
+        	u.setMotDePasse(user.getMotDePasse());
+        	users.add(u);
+        }
+        
+        boolean exist = false;
+        
+		for (Utilisateur user : users) {
+			if (user.getEmail().equals(email)) {
+				exist = true;
+			}
+		}
+		        
+        if (exist == false && role.equals("Modérateur")) {
+        	Utilisateur newAbonne = new Utilisateur();
+        	newAbonne.setNom(nom);
+        	newAbonne.setPrenom(prenom);
+        	newAbonne.setEmail(email);
+        	newAbonne.setMotDePasse(motDePasse);
+        	newAbonne.setAdresse(adresse);
+        	newAbonne.setTelephone(telephone);
+        	newAbonne.setDateCreation(new Date());
+        	newAbonne.setRole("MODERATEUR");
+        	
+        	et.begin();
+        	em.persist(newAbonne);
+        	et.commit();
+        	return 1;
+        }else {
+        	return 0;
+        }
+    	
+    		
     }
     
     public Utilisateur seConnecter (String email, String motDePasse) throws NoResultException{
