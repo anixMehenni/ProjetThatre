@@ -8,6 +8,8 @@
 <jsp:useBean id="_UTILISATEUR_COURANT"
 	class="beans.Utilisateur" scope="session"></jsp:useBean>
 	
+	<%@ include file="/pages/shared/Header.jsp" %>
+	
 	
 <!DOCTYPE html>
 <html>

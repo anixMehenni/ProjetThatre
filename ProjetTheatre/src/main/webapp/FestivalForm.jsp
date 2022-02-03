@@ -1,7 +1,28 @@
 <%@page import="beans.Organisateur"%>
 <%@page import="beans.Sponsor"%>
 
-<%@ include file="./shared/Header.jsp" %>
+<%@ include file="/pages/shared/Header.jsp" %>
+
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<meta charset="ISO-8859-1">
+
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+<!-- Header styling --> 
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
+
+<link
+      rel="stylesheet"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+    />
+</head>
+
+<body>
 	<div class="container">	
 		<h3 class="text-center my-5">Création festival</h3>
 	
@@ -97,5 +118,5 @@
 		</form>
 	</div>
 <script type="text/javascript" src="/ProjetTheatre/js/festivalForm.js"></script>
-
-<%@ include file="./shared/Footer.jsp" %>
+</body>
+<%@ include file="/pages/shared/Footer.jsp" %>
