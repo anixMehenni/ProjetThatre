@@ -101,7 +101,9 @@
 							</div>
 							
 							<div class="col-4 text-right">
-								<button class="btn btn-primary">Réserver</button>	
+								<a href="/ProjetTheatre/reservation/add?representation=<%= representation.getId() %>">
+									<button class="btn btn-primary">Réserver</button>	
+								</a>
 							</div>
 						</div>
 						<hr/>
