@@ -63,6 +63,11 @@
 									+ Représentation
 								</button>
 							</a>
+							<a href="/ProjetTheatre/commentaire/validation?piece=<%= piece.getId() %>">
+								<button class="btn btn-outline-info my-1">
+									Commentaires
+								</button>
+							</a>
 							<a class="my-1" href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
 								<button class="btn btn-outline-info my-1">
 									Voir
