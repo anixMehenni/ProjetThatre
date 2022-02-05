@@ -17,12 +17,15 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
 
-<link href="../../ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
+<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
+<link href="/ProjetTheatre/css/rating.css" rel="stylesheet" type="text/css" />
 
 <link
       rel="stylesheet"
-      href="../../ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
+      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
     />
+    <link rel="stylesheet" href="/ProjetTheatre/css/owl.carousel.min.css">
+   	<link rel="stylesheet" href="/ProjetTheatre/css/owl.theme.default.min.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 

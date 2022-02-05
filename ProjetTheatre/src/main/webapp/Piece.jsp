@@ -12,43 +12,6 @@
 
 <%@ include file="/pages/shared/Header.jsp" %>
 
-<head>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-<!-- Header styling --> 
-<link href="/ProjetTheatre/css/headerStyle.css" rel="stylesheet" type="text/css" />
-
-<link
-      rel="stylesheet"
-      href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
-    />
-</head>
-<style>
-.rating{
-  display : flex;
-}
-
-.rating input{
-  position : absolute;
-  left     : -100vw;
-}
-
-.rating label{
-  width      : 48px;
-  height     : 48px;
-  padding    : 48px 0 0;
-  overflow   : hidden;
-  background : url('/ProjetTheatre/images/stars.svg') no-repeat top left;
-}
-
-.rating:not(:hover) input:indeterminate + label,
-.rating:not(:hover) input:checked ~ input + label,
-.rating input:hover ~ input + label{
-  background-position : -48px 0;
-}
-
-.rating:not(:hover) input:focus-visible + label{
-  background-position : -96px 0;
-}</style>
 <body>
 	<% 
 		Piece piece = (Piece) request.getAttribute("piece");
@@ -69,28 +32,44 @@
 			</div>
 		<% } %>
 		
-		<div class="row no-gutters align-items-center min-vh-80">
-			<div class="col-7">
-				<%-- for (Photo photo: piece.getPhotos()) { --%>
-					<%-- <img src="<%= photo.getChemin() %>" alt="photos"/> --%>
-				<%-- } --%>
-				<%-- TODO Replace with carousel --%>
-				<h1>TODO : Remplacer par un caroussel</h1>
-				<img src="/ProjetTheatre/images/bg_1.jpg" class="img-fluid" alt="Responsive image">
-			</div>
-			<div class="col d-flex flex-column justify-content-center align-items-center p-5">				
-				<h1 class="display-4 text-center font-weight-bold"><%= piece.getNom() %></h1>
-				<h3>par <span><%= piece.getAuteur() %></span></h3>
-				<% if (visibleCommentaires.size() > 0) { %>
-					<h6 class="font-italic font-weight-light">
-						<%= piece.getMoyenne() %> / 10 sur <%= visibleCommentaires.size() %> avis
-					</h6>	
-				<% } %>
+		<div class="d-flex flex-column justify-content-center align-items-center p-5">				
+			<h1 class="display-4 text-center font-weight-bold"><%= piece.getNom() %></h1>
+			<h3>par <span><%= piece.getAuteur() %></span></h3>
+			
+			<% if (visibleCommentaires.size() > 0) { %>
+				<div class="rating">
+					<% for (int i = 1; i <= 10; i++) { %>
+					  <input 
+					  	id="ratingResult<%= i %>" 
+					  	type="radio" 
+					  	name="noteResults" 
+					  	value="<%= i %>" 
+					  	disabled
+					  	<%= piece.getMoyenne() == i ? "checked" : "" %>
+				  	  >
+					  <label for="ratingResult<%= i %>"><%= i %></label>
+                    <% } %>	
+                   </div>
+				<span class="font-italic font-weight-light">
+					<%= piece.getMoyenne() %> / 10 sur <%= visibleCommentaires.size() %> avis
+				</span>	
+			<% } %>
+			
+			<h4 class="mt-5">Résumé</h4>
+			<p class="lead text-justify mx-5 px-5"><%= piece.getDescription() %></p>
+		</div>
+		
+		<div class="row justify-content-center align-items-center">
+			<div class="col-6">				
+				<div class="owl-carousel owl-theme">
+					<% for (Photo photo: piece.getPhotos()) { %>
+						<img class="img-fluid" src="<%= photo.getChemin() %>"/>
+					<% } %>
+				</div>
 				
-				<h4 class="mt-5">Résumé</h4>
-				<p class="lead text-justify"><%= piece.getDescription() %></p>
 			</div>
 		</div>
+		
 		<div class="row p-5">
 			<div class="col">
 				<h3 class="text-center font-weight-bold mb-5">Distribution</h3>
@@ -186,4 +165,25 @@
 		</div>
 	</div>
 </body>
+<script>
+	$(document).ready(function(){
+	  var carousel = function() {
+			$('.owl-carousel').owlCarousel({
+		    loop:true,
+		    autoplay: true,
+		    margin:30,
+		    animateOut: 'fadeOut',
+		    animateIn: 'fadeIn',
+		    smartSpeed: 15000,
+		    nav:true,
+		    dots: true,
+		    autoplayHoverPause: false,
+		    items: 1,
+		    navText : ["<span class='ion-ios-arrow-back'></span>","<span class='ion-ios-arrow-forward'></span>"],
+			});
+
+		};
+		carousel();
+	});
+</script>
 <%@ include file="/pages/shared/Footer.jsp" %>

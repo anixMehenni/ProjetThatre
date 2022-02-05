@@ -19,10 +19,10 @@
                 <form method="POST" id="commentForm" action="/ProjetTheatre/commentaire/add">
                     <input type="hidden" name="piece" value="<%= ((Piece) request.getAttribute("piece")).getId() %>"/>
                     <div class="rating">
-                    <% for (int i = 1; i <= 10; i++) { %>
-					  <input id="rating<%= i %>" type="radio" name="note" value="<%= i %>" required>
-					  <label for="rating<%= i %>"><%= i %></label>
-                    <% } %>					  
+	                    <% for (int i = 1; i <= 10; i++) { %>
+						  <input id="rating<%= i %>" type="radio" name="note" value="<%= i %>" required>
+						  <label for="rating<%= i %>"><%= i %></label>
+	                    <% } %>					  
 					</div>
                     <div class="form-group">
                         <label for="commentaire">Commentaire</label>
