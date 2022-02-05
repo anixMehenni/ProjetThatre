@@ -28,7 +28,7 @@
 <body>
 	<table style="width: 20%">
 		<%
-		Utilisateur currentUser = (Utilisateur) session.getAttribute("_UTILISATEUR_COURANT");
+		currentUser = (Utilisateur) session.getAttribute("_UTILISATEUR_COURANT");
 		if (currentUser == null) {
 			System.out.println("Liste operations est a null");
 		}

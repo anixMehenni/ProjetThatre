@@ -150,5 +150,54 @@ public class GestionUtilisateurs {
 
     	
     }
+    
+    public Utilisateur modifierInfos (Utilisateur curentInfos, String nom, String prenom, 
+    		String email, String motDePasse, String telephone, String adresse) throws NoResultException{
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		
+		
+        Query query = em
+                .createQuery("SELECT u FROM Utilisateur as u where u.id like :id");
+        query.setParameter("id", curentInfos.getId());
+        
+        Utilisateur resultatQuery = (Utilisateur) query.getSingleResult();
+        
+        Utilisateur user = new Utilisateur();
+        user.setNom(resultatQuery.getNom());
+        user.setPrenom(resultatQuery.getPrenom());
+        user.setEmail(resultatQuery.getEmail());
+        user.setMotDePasse(resultatQuery.getMotDePasse());
+        user.setTelephone(resultatQuery.getTelephone());
+        user.setAdresse(resultatQuery.getAdresse());
+        
+        if (!user.getNom().equals(nom)) {
+        	resultatQuery.setNom(nom);
+        }
+        if (!user.getPrenom().equals(prenom)) {
+        	resultatQuery.setPrenom(prenom);
+        }
+        if (!user.getEmail().equals(email)) {
+        	resultatQuery.setEmail(email);
+        }
+        if (!user.getMotDePasse().equals(motDePasse)) {
+        	resultatQuery.setMotDePasse(motDePasse);
+        }
+        if (!user.getTelephone().equals(telephone)) {
+        	resultatQuery.setTelephone(telephone);
+        }
+        if (!user.getAdresse().equals(adresse)) {
+        	resultatQuery.setAdresse(adresse);
+        }
+        
+        et.begin();
+    	em.merge(resultatQuery);
+    	et.commit();
+        
+        resultatQuery = (Utilisateur) query.getSingleResult();
+        return resultatQuery;
+
+	
+}
 
 }
