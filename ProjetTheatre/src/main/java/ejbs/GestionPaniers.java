@@ -71,5 +71,18 @@ public class GestionPaniers {
 
     	return query.getResultList();
     }
+    
+    public Panier pay(int id) {
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction et = em.getTransaction();
+    	Panier panier = em.find(Panier.class, id);
+    	panier.setStatut("REGLE");
+    	
+    	et.begin();
+    	em.persist(panier);
+    	et.commit();
+    	
+    	return panier;
+    }
 
 }

@@ -71,7 +71,7 @@ public class AddBillet extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute(Utilisateur._UTILISATEUR_COURANT);
 		Map<String, String[]> formValues = request.getParameterMap();
 		gestionBillets.add(formValues, utilisateur);
-		doGet(request, response);
+		response.sendRedirect(request.getContextPath() + "/paniers");
 	}
 
 }

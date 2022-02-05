@@ -32,13 +32,19 @@
 								<div class="h5 my-0 mx-5">
 									Panier du <%= df.format(panier.getDateCreation()) %>
 								</div>
-								<span>(<%= panier.getStatut() %>)</span>
-								
+									
+	  							<% if (panier.getStatut().equals("A PAYER")) { %>
+									<span>(<%= panier.getStatut() %>)</span>
+								<% } %>
 							</div>
 	  						
-							<button class="btn btn-primary text-center">
-						    	Payer
-			             	</button>
+	  						<% if (panier.getStatut().equals("A PAYER")) { %>
+		  						<a href="/ProjetTheatre/panier/pay?id=<%= panier.getId() %>">
+									<button class="btn btn-primary text-center">
+								    	Payer
+					             	</button>
+		  						</a>
+	  						<% } %>
 						</div>
 		            </div>
 	                <div class="collapse" id="panier<%= panier.getId() %>">	            		
@@ -61,9 +67,15 @@
 									</div>									
 									<div class="col"><%= billet.getPlaces().size() %> places</div>
 									<div class="col text-right">
-										<button class="btn btn-danger">
-											x
-										</button>
+										<% if (panier.getStatut().equals("A PAYER")) { %>
+											<button class="btn btn-danger">
+												x
+											</button>
+										<% } else { %>
+											<button class="btn btn-outline-primary">
+												Télécharger
+											</button>
+										<% } %>
 									</div>
 								</div>
 								<div class="font-italic font-weight-light mt-2">
