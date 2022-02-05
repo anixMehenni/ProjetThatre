@@ -59,7 +59,17 @@ public class GestionPaniers {
     		
     		return newPanier;
     	}
+    }
+    
+    public List<Panier> findAll(Utilisateur utilisateur) {
+    	EntityManager em = emf.createEntityManager();
+    	TypedQuery<Panier> query = em.createQuery(
+    			"from Panier p WHERE p.utilisateur = :utilisateur ORDER BY p.dateCreation DESC", 
+    			Panier.class
+			);    	
+    	query.setParameter("utilisateur", utilisateur);
 
+    	return query.getResultList();
     }
 
 }
