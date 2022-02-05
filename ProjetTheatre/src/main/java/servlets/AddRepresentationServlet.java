@@ -55,6 +55,7 @@ public class AddRepresentationServlet extends HttpServlet {
 		request.setAttribute("piece", piece);
 		request.setAttribute("festivals", festivals);
 		request.setAttribute("lieux", lieux);
+		request.setAttribute("pageName", "Ajout Représentation");
 		getServletContext().getRequestDispatcher("/RepresentationForm.jsp").forward(request, response); 
 	}
 
