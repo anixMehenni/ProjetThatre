@@ -116,12 +116,12 @@ public class Piece implements Serializable {
 		return comedienPiece;
 	}
 
-	public double getMoyenne() {
-		return this.commentaires
+	public int getMoyenne() {
+		return (int) this.commentaires
 				.stream()
 				.filter(commentaire -> Commentaire.StatutEnum.valueOf(commentaire.getStatut()) == Commentaire.StatutEnum.VALIDE)
 				.mapToDouble(commentaire -> commentaire.getNote())
-				.average()
+				.average()				
 				.orElse(0);
 	}
 	
