@@ -17,4 +17,11 @@ $(document).ready(function(){
 			$(this).parent().parent().remove();
 		}
 	});
+	
+	const today = new Date();
+	$("#dateDebut").attr("min", today.toISOString().split("T")[0]);
+	$("#dateDebut").on("change", function() {
+		debut = $(this).val();
+		$("#dateFin").attr("min", debut);		
+	});
 });

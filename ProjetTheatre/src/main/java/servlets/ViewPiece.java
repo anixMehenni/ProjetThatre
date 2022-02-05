@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.Piece;
 import ejbs.GestionPieces;
@@ -36,6 +37,11 @@ public class ViewPiece extends HttpServlet {
 		Piece piece = gestionPieces.findOne(id);
 		request.setAttribute("piece", piece);
 		request.setAttribute("pageName", piece.getNom());
+		HttpSession session = request.getSession();
+		if (session.getAttribute("createdComment") != null) {			
+			request.setAttribute("createdComment", true);
+			session.removeAttribute("createdComment");
+		}
 		getServletContext().getRequestDispatcher("/Piece.jsp").forward(request, response);     
 	}
 

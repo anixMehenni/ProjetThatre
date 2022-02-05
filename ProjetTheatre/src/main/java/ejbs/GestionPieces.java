@@ -98,7 +98,7 @@ public class GestionPieces {
     
     public List<Piece> findAll() {
     	EntityManager em = emf.createEntityManager();
-    	TypedQuery<Piece> query = em.createQuery("from Piece", Piece.class);
+    	TypedQuery<Piece> query = em.createQuery("from Piece p ORDER BY p.dateCreation DESC", Piece.class);
     	return query.getResultList();
     }
     
