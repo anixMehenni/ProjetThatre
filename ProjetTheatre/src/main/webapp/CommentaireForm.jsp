@@ -16,19 +16,31 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/ProjetTheatre/commentaire/add">
+                <form method="POST" id="commentForm" action="/ProjetTheatre/commentaire/add">
                     <input type="hidden" name="piece" value="<%= ((Piece) request.getAttribute("piece")).getId() %>"/>
-                    <div class="form-group">
-                        <label for="note">Note</label>                        
-                        <input type="range" class="form-control-range" min="0" max="10" name="note" />
-                    </div>
+                    <div class="rating">
+                    <% for (int i = 1; i <= 10; i++) { %>
+					  <input id="rating<%= i %>" type="radio" name="note" value="<%= i %>" required>
+					  <label for="rating<%= i %>"><%= i %></label>
+                    <% } %>					  
+					</div>
                     <div class="form-group">
                         <label for="commentaire">Commentaire</label>
-                        <textarea class="form-control" id="description" rows="5" name="commentaire"></textarea>
+                        <textarea 
+                        	class="form-control" 
+                        	id="descriptionInput" 
+                        	rows="5" 
+                        	name="commentaire" 
+                        	required
+                        	minlength="10"
+                        	maxlength="250"
+                       	></textarea>
                     </div>
 					
 					<div class="d-flex justify-content-center">
-	                    <button type="submit" class="btn btn-primary text-center">Ajouter</button>
+	                    <button type="submit" class="btn btn-primary text-center" id="addCommentButton">
+	                    	Ajouter
+                    	</button>
 					</div>
                 </form>
             </div>

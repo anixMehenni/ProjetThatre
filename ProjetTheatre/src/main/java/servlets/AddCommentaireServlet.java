@@ -38,6 +38,7 @@ public class AddCommentaireServlet extends HttpServlet {
 		
 		Utilisateur utilisateur = (Utilisateur) request.getSession().getAttribute(Utilisateur._UTILISATEUR_COURANT);
 		gestionCommentaires.add(formValues, utilisateur);
+		request.getSession().setAttribute("createdComment", true);
 		response.sendRedirect(request.getContextPath() + "/piece/view?id=" + request.getParameter("piece"));
 	}
 

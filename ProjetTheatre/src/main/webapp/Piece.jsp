@@ -22,6 +22,33 @@
       href="/ProjetTheatre/css/A.style.css.pagespeed.cf.2hpsIU3gX-.css"
     />
 </head>
+<style>
+.rating{
+  display : flex;
+}
+
+.rating input{
+  position : absolute;
+  left     : -100vw;
+}
+
+.rating label{
+  width      : 48px;
+  height     : 48px;
+  padding    : 48px 0 0;
+  overflow   : hidden;
+  background : url('/ProjetTheatre/images/stars.svg') no-repeat top left;
+}
+
+.rating:not(:hover) input:indeterminate + label,
+.rating:not(:hover) input:checked ~ input + label,
+.rating input:hover ~ input + label{
+  background-position : -48px 0;
+}
+
+.rating:not(:hover) input:focus-visible + label{
+  background-position : -96px 0;
+}</style>
 <body>
 	<% 
 		Piece piece = (Piece) request.getAttribute("piece");
@@ -29,6 +56,19 @@
 	%>
 	
 	<div class="container-fluid p-0">
+		<% if (request.getAttribute("createdComment") != null) { %>
+			<div class="row my-2 justify-content-center">
+				<div class="col-6">
+					<div class="d-flex align-items-center alert alert-dismissible fade show alert-success my-2" role="alert">
+					  	Commentaire ajouté, en attente de modération<span>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						    <span aria-hidden="true">&times;</span>
+					    </button>
+					</div>
+				</div>
+			</div>
+		<% } %>
+		
 		<div class="row no-gutters align-items-center min-vh-80">
 			<div class="col-7">
 				<%-- for (Photo photo: piece.getPhotos()) { --%>
