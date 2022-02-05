@@ -2,7 +2,7 @@
 <%@page import="beans.Commentaire"%>
 
 <%
-	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/M/YYYY"); 
+	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/YYYY"); 
 %>
 	
 <%@ include file="/pages/shared/Header.jsp" %>
