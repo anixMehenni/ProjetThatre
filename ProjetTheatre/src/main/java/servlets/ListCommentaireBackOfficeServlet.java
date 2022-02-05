@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Commentaire;
+import beans.Piece;
 import ejbs.GestionCommentaires;
+import ejbs.GestionPieces;
 
 /**
  * Servlet implementation class ListCommentaireBackOfficeServlet
@@ -20,6 +24,8 @@ import ejbs.GestionCommentaires;
 public class ListCommentaireBackOfficeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	@EJB 
+	GestionPieces gestionPieces;
 	@EJB
 	GestionCommentaires gestionCommentaires;
     /**
@@ -34,9 +40,12 @@ public class ListCommentaireBackOfficeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Commentaire> commentaires = gestionCommentaires.findAll();
+		List<Commentaire> commentaires = gestionCommentaires.findAll(request.getParameterMap());
+		List<Piece> pieces = gestionPieces.findAll();
 		request.setAttribute("commentaires", commentaires);
-		request.setAttribute("pageName", "Gestion des commentaires");
+		request.setAttribute("pieces", pieces);
+		request.setAttribute("statuts", Commentaire.StatutEnum.values());
+		request.setAttribute("pageName", "Gestion des commentaires");		
 		getServletContext().getRequestDispatcher("/CommentaireBackOfficeList.jsp").forward(request, response); 
 	}
 
@@ -45,8 +54,8 @@ public class ListCommentaireBackOfficeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("commentaire"));
-		String statut = request.getParameter("statut");
-		gestionCommentaires.changeStatus(id, statut);
+		String newStatut = request.getParameter("newStatut");
+		gestionCommentaires.changeStatus(id, newStatut);
 		doGet(request, response);
 	}
 
