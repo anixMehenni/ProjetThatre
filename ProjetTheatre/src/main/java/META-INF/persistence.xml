@@ -20,6 +20,7 @@
 		<class>beans.Role</class>
 		<class>beans.Sponsor</class>
 		<class>beans.Utilisateur</class>
+		<class>beans.CategoriePlace</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/projet-java-theatre"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>

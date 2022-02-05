@@ -21,16 +21,21 @@ public class Billet implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_reservation")
-	private Date dateReservation;
+	private Date dateReservation = new Date();
 
 	@Column(name="est_supprime")
-	private byte estSupprime;
+	private byte estSupprime = 0;
 
 	@Column(name="lien_telechargement")
 	private String lienTelechargement;
 
+	//bi-directional many-to-one association to Panier
+	@ManyToOne()
+	@JoinColumn(name="id_panier")
+	private Panier panier;
+
 	//bi-directional many-to-many association to Place
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 		name="billet_place"
 		, joinColumns={
@@ -38,9 +43,14 @@ public class Billet implements Serializable {
 			}
 		, inverseJoinColumns={
 			@JoinColumn(name="id_place")
-			}
+			}		
 		)
 	private List<Place> places;
+
+	//bi-directional many-to-one association to Representation
+	@ManyToOne
+	@JoinColumn(name="id_representation")
+	private Representation representation;
 
 	public Billet() {
 	}
@@ -77,12 +87,28 @@ public class Billet implements Serializable {
 		this.lienTelechargement = lienTelechargement;
 	}
 
+	public Panier getPanier() {
+		return this.panier;
+	}
+
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
+
 	public List<Place> getPlaces() {
 		return this.places;
 	}
 
 	public void setPlaces(List<Place> places) {
 		this.places = places;
+	}
+
+	public Representation getRepresentation() {
+		return this.representation;
+	}
+
+	public void setRepresentation(Representation representation) {
+		this.representation = representation;
 	}
 
 }
