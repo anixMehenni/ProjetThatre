@@ -2,7 +2,7 @@
 <%@page import="beans.Commentaire"%>
 
 <%
-	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/M/YYYY"); 
+	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/YYYY"); 
 %>
 	
 <%@ include file="/pages/shared/Header.jsp" %>
@@ -59,12 +59,12 @@
 						<td class="text-center"><%= df.format(piece.getDateCreation()) %></td>						
 						<td class="text-right">							
 							<a href="/ProjetTheatre/representation/add?piece=<%= piece.getId() %>">
-								<button class="btn btn-outline-primary">
+								<button class="btn btn-outline-primary my-1">
 									+ Représentation
 								</button>
 							</a>
-							<a href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
-								<button class="btn btn-outline-info">
+							<a class="my-1" href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
+								<button class="btn btn-outline-info my-1">
 									Voir
 								</button>
 							</a>

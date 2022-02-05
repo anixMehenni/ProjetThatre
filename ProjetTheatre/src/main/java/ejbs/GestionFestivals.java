@@ -90,7 +90,7 @@ public class GestionFestivals {
     
     public List<Festival> findAll() {
     	EntityManager em = emf.createEntityManager();
-    	TypedQuery<Festival> query = em.createQuery("from Festival", Festival.class);
+    	TypedQuery<Festival> query = em.createQuery("from Festival f ORDER BY f.dateCreation DESC", Festival.class);
     	return query.getResultList();
     }
 
