@@ -107,7 +107,7 @@
               <ul class="navbar-nav ml-auto mr-md-3">
                 <li class="nav-item active">
                   <a
-                    href="#"
+                    href="../../ProjetTheatre/VisualiserFestival"
                     class="nav-link"
                     >Accueil</a
                   >
