@@ -81,7 +81,7 @@
 							</div>
 							<div class="item">
 								<div class="work">
-									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(1) %>&pic=<%= photos.get(1) %>">
+									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(0) %>&pic=<%= photos.get(1) %>">
 								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(1) %>);">
 										
 									</div>
@@ -90,7 +90,7 @@
 							</div>
 							<div class="item">
 								<div class="work">
-									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(2) %>&pic=<%= photos.get(2) %>">
+									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(0) %>&pic=<%= photos.get(2) %>">
 								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(2) %>);">
 										
 									</div>
