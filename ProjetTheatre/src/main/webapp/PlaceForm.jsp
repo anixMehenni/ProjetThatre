@@ -18,7 +18,7 @@
 	%>
 
 <h5 class="text-center">
-	Réservation de vous places pour : 
+	Réservation de vos places pour : 
 	<br/>
 	<%= representation.getPiece().getNom() %> 
 </h5>
