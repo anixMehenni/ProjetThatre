@@ -26,8 +26,8 @@ import ejbs.GestionRepresentations;
 public class AddRepresentationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	@EJB
-	GestionFestivals gestionFestivals;
+//	@EJB
+//	GestionFestivals gestionFestivals;
 	
 	@EJB
 	GestionLieux gestionLieux;
@@ -50,10 +50,10 @@ public class AddRepresentationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Piece piece = gestionPieces.findOne(Integer.parseInt(request.getParameter("piece")));
-		List<Festival> festivals = gestionFestivals.findAll();
+//		List<Festival> festivals = gestionFestivals.findAll();
 		List<Lieu> lieux = gestionLieux.findAll();
 		request.setAttribute("piece", piece);
-		request.setAttribute("festivals", festivals);
+//		request.setAttribute("festivals", festivals);
 		request.setAttribute("lieux", lieux);
 		request.setAttribute("pageName", "Ajout Représentation");
 		getServletContext().getRequestDispatcher("/RepresentationForm.jsp").forward(request, response); 

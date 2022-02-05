@@ -15,6 +15,7 @@
 		<form method="POST">
 			<input type="hidden" name="piece" value="<%= piece.getId() %>"/>
 			<div class="row align-items-center">
+				<%-- 
 				<div class="col">
 					<div class="form-group">
 					    <label for="festivals">Festival</label>
@@ -26,6 +27,7 @@
 					    </select>						    
 					</div>
 				</div>
+				--%>
 				<div class="col">
 					<div class="form-group">
 					    <label for="lieux">Lieu</label>

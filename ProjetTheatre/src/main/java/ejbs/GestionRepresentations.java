@@ -40,7 +40,7 @@ public class GestionRepresentations {
     }
     
     public List<Representation> addMultiple(Map<String, String[]> formValues) {
-    	String[] festivalIds = formValues.get("festivals");
+//    	String[] festivalIds = formValues.get("festivals");
     	String[] lieuIds = formValues.get("lieux");
     	String[] dates = formValues.get("dates");
     	String[] heures = formValues.get("heures");
@@ -53,11 +53,12 @@ public class GestionRepresentations {
     	List<Representation> newRepresentations = new ArrayList<>();
 
     	et.begin();
-    	for (int i = 0; i < festivalIds.length; i++) {
+    	for (int i = 0; i < lieuIds.length; i++) {
     		try {
     			Representation newRepresentation = new Representation();
     			newRepresentation.setPiece(em.getReference(Piece.class, pieceId));
-    			newRepresentation.setFestival(em.getReference(Festival.class, Integer.parseInt(festivalIds[i])));
+//    			newRepresentation.setFestival(em.getReference(Festival.class, Integer.parseInt(festivalIds[i])));
+    			newRepresentation.setFestival(em.getReference(Festival.class, 1));
     			newRepresentation.setLieu(em.getReference(Lieu.class, Integer.parseInt(lieuIds[i])));
     			String fullDate = dates[i].concat(" ").concat(heures[i]);
     			newRepresentation.setDate(formatter.parse(fullDate));
