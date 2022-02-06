@@ -127,7 +127,7 @@
 							href="../../ProjetTheatre/DeconnexionServlet"
 							class="nav-link">Se déconnecter</a></li>
 						
-						
+						<% if(currentUser.getRole().equals("MODERATEUR") || currentUser.getRole().equals("ADMINISTRATEUR")) { %>
 						<li class="dropdown nav-item d-md-flex align-items-center"><a
 							href="#"
 							class="dropdown-toggle nav-link d-flex align-items-center justify-content-center icon-cart p-0"
@@ -144,7 +144,7 @@
 									class="dropdown-item">Ajouter un modérateur</a>
 								<% }%>
 							</div></li>
-							
+							<% } %>
 							<% } %>
 					</ul>
 				</div>

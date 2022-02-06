@@ -16,6 +16,7 @@
 	<% 
 		Piece piece = (Piece) request.getAttribute("piece");
 		List<Commentaire> visibleCommentaires = piece.getCommentaires(Commentaire.StatutEnum.VALIDE);
+		currentUser = (Utilisateur) session.getAttribute("_UTILISATEUR_COURANT");
 	%>
 	
 	<div class="container-fluid p-0">
@@ -118,12 +119,20 @@
 									<%= representation.getFestival().getNom() %> (<%= representation.getFestival().getVille() %>)
 								</div>
 							</div>
-							
+							<% if (currentUser != null){%>
 							<div class="col-4 text-right">
 								<a href="/ProjetTheatre/reservation/add?representation=<%= representation.getId() %>">
 									<button class="btn btn-primary">Réserver</button>	
 								</a>
 							</div>
+							<% } %>
+							<% if (currentUser == null){%>
+							<div class="col-4 text-right">
+								<a href="/ProjetTheatre/ConnexionAbonneServlet">
+									<button class="btn btn-primary">Réserver</button>	
+								</a>
+							</div>
+							<% } %>
 						</div>
 						<hr/>
 					<% } %>
