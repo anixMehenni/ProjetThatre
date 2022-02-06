@@ -69,10 +69,7 @@ public class CreateFestivalServlet extends HttpServlet {
 	    		.collect(Collectors.toList());
 		Map<String, String[]> formValues = request.getParameterMap();
 		gestionFestivals.create(formValues, photos, uploadPath);
-		
-		
-
-		doGet(request, response);
+		response.sendRedirect(request.getContextPath() + "/bo/festival");
 	}
 
 }

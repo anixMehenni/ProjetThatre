@@ -3,6 +3,7 @@ package beans;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -20,6 +21,10 @@ public class Representation implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
+
+	//bi-directional many-to-one association to Billet
+	@OneToMany(mappedBy="representation")
+	private List<Billet> billets;
 
 	//bi-directional many-to-one association to Festival
 	@ManyToOne
@@ -53,6 +58,28 @@ public class Representation implements Serializable {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public List<Billet> getBillets() {
+		return this.billets;
+	}
+
+	public void setBillets(List<Billet> billets) {
+		this.billets = billets;
+	}
+
+	public Billet addBillet(Billet billet) {
+		getBillets().add(billet);
+		billet.setRepresentation(this);
+
+		return billet;
+	}
+
+	public Billet removeBillet(Billet billet) {
+		getBillets().remove(billet);
+		billet.setRepresentation(null);
+
+		return billet;
 	}
 
 	public Festival getFestival() {

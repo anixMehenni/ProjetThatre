@@ -1,8 +1,8 @@
 <%@page import="beans.Piece"%>
-
+<%@page import="beans.Commentaire"%>
 
 <%
-	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/M/YYYY"); 
+	java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/YYYY"); 
 %>
 	
 <%@ include file="/pages/shared/Header.jsp" %>
@@ -22,12 +22,14 @@
 		<table class="table table-striped">
 			<thead>
 			    <tr>
-			      <th scope="col">Nom</th>
-			      <th scope="col">Auteur</th>			      
-			      <th scope="col">Représentations</th>			          
-			      <th scope="col">Commentaires</th>			          
-			      <th scope="col">Note</th>
-			      <th scope="col">Date de création</th>
+			      <th class="text-center" scope="col">Nom</th>
+			      <th class="text-center" scope="col">Auteur</th>			      
+			      <th class="text-center" scope="col">Représentations</th>			          
+			      <th class="text-center" scope="col">Commentaires validés</th>				          
+			      <th class="text-center" scope="col">Commentaires à valider</th>			          
+			      <th class="text-center" scope="col">Commentaires rejetés</th>				          
+			      <th class="text-center" scope="col">Note</th>
+			      <th class="text-center" scope="col">Date de création</th>
 			      <th class="text-right" scope="col">Actions</th>
 			    </tr>
 		    </thead>
@@ -37,24 +39,37 @@
 						<td><%= piece.getNom() %></td>
 						<td><%= piece.getAuteur() %></td>
 						<td class="text-center"><%= piece.getRepresentations().size() %></td>
-						<td class="text-center"><%= piece.getCommentaires().size() %></td>						
-						<td class="text-center">
-							<%= piece.getCommentaires()
-								.stream()
-								.mapToDouble(c -> c.getNote())
-								.average()
-								.orElse(0)
-							%>
+						
+						<% 
+							int commentairesAValider = piece.getCommentaires(Commentaire.StatutEnum.CREE).size();
+							int commentairesValides = piece.getCommentaires(Commentaire.StatutEnum.VALIDE).size();
+							int commentairesRejetes = piece.getCommentaires(Commentaire.StatutEnum.REJETE).size();
+						%>
+						<td class="text-center text-success">
+							<%= commentairesValides %>
 						</td>
+						<td class="text-center text-warning">
+							<%= commentairesAValider %>
+						</td>	
+						
+						<td class="text-center text-danger">
+							<%= commentairesRejetes %>
+						</td>					
+						<td class="text-center"><%= piece.getMoyenne()%></td>
 						<td class="text-center"><%= df.format(piece.getDateCreation()) %></td>						
 						<td class="text-right">							
 							<a href="/ProjetTheatre/representation/add?piece=<%= piece.getId() %>">
-								<button class="btn btn-outline-primary">
+								<button class="btn btn-outline-primary my-1">
 									+ Représentation
 								</button>
 							</a>
-							<a href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
-								<button class="btn btn-outline-info">
+							<a href="/ProjetTheatre/commentaire/validation?piece=<%= piece.getId() %>">
+								<button class="btn btn-outline-info my-1">
+									Commentaires
+								</button>
+							</a>
+							<a class="my-1" href="/ProjetTheatre/piece/view?id=<%= piece.getId() %>">
+								<button class="btn btn-outline-info my-1">
 									Voir
 								</button>
 							</a>

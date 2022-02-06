@@ -48,7 +48,6 @@ public class GestionUtilisateurs {
     	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
         List <Utilisateur> resultatQuery = query.getResultList();
         ArrayList <Utilisateur> users = new ArrayList <Utilisateur>();
-        boolean exist = false;
 		
         for(Utilisateur user : resultatQuery) {
         	Utilisateur u = new Utilisateur();
@@ -59,11 +58,13 @@ public class GestionUtilisateurs {
         	users.add(u);
         }
         
-        for(Utilisateur user : users) {
-        System.out.print(user.getEmail());
-        if(user.getEmail().equals(email)) {exist = true;}
-        }
         
+        boolean exist = false;
+        
+        for(Utilisateur user : users) {
+        	if(user.getEmail().equals(email)) {exist = true;}
+        }
+		        
         if (exist == false) {
         	Utilisateur newAbonne = new Utilisateur();
         	newAbonne.setNom(nom);
@@ -87,6 +88,53 @@ public class GestionUtilisateurs {
     	
     }
     
+    public int ajouterNouveauModerateur (String nom, String prenom, 
+    		String email, String motDePasse, String telephone, String adresse,String role) throws NoResultException{
+    	EntityManager em = emf.createEntityManager();
+    	EntityTransaction et = em.getTransaction();
+    	
+    	Query query = em.createQuery("SELECT u FROM Utilisateur as u");
+        List <Utilisateur> resultatQuery = query.getResultList();
+        ArrayList<Utilisateur>  users = new ArrayList<Utilisateur>();
+        
+        for(Utilisateur user : resultatQuery) {
+        	Utilisateur u = new Utilisateur();
+        	u.setId(user.getId());
+        	u.setEmail(user.getEmail());
+        	u.setMotDePasse(user.getMotDePasse());
+        	users.add(u);
+        }
+        
+        boolean exist = false;
+        
+		for (Utilisateur user : users) {
+			if (user.getEmail().equals(email)) {
+				exist = true;
+			}
+		}
+		        
+        if (exist == false && role.equals("Modérateur")) {
+        	Utilisateur newAbonne = new Utilisateur();
+        	newAbonne.setNom(nom);
+        	newAbonne.setPrenom(prenom);
+        	newAbonne.setEmail(email);
+        	newAbonne.setMotDePasse(motDePasse);
+        	newAbonne.setAdresse(adresse);
+        	newAbonne.setTelephone(telephone);
+        	newAbonne.setDateCreation(new Date());
+        	newAbonne.setRole("MODERATEUR");
+        	
+        	et.begin();
+        	em.persist(newAbonne);
+        	et.commit();
+        	return 1;
+        }else {
+        	return 0;
+        }
+    	
+    		
+    }
+    
     public Utilisateur seConnecter (String email, String motDePasse) throws NoResultException{
     		EntityManager em = emf.createEntityManager();
             Query query = em
@@ -104,5 +152,54 @@ public class GestionUtilisateurs {
 
     	
     }
+    
+    public Utilisateur modifierInfos (Utilisateur curentInfos, String nom, String prenom, 
+    		String email, String motDePasse, String telephone, String adresse) throws NoResultException{
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		
+		
+        Query query = em
+                .createQuery("SELECT u FROM Utilisateur as u where u.id like :id");
+        query.setParameter("id", curentInfos.getId());
+        
+        Utilisateur resultatQuery = (Utilisateur) query.getSingleResult();
+        
+        Utilisateur user = new Utilisateur();
+        user.setNom(resultatQuery.getNom());
+        user.setPrenom(resultatQuery.getPrenom());
+        user.setEmail(resultatQuery.getEmail());
+        user.setMotDePasse(resultatQuery.getMotDePasse());
+        user.setTelephone(resultatQuery.getTelephone());
+        user.setAdresse(resultatQuery.getAdresse());
+        
+        if (!user.getNom().equals(nom)) {
+        	resultatQuery.setNom(nom);
+        }
+        if (!user.getPrenom().equals(prenom)) {
+        	resultatQuery.setPrenom(prenom);
+        }
+        if (!user.getEmail().equals(email)) {
+        	resultatQuery.setEmail(email);
+        }
+        if (!user.getMotDePasse().equals(motDePasse)) {
+        	resultatQuery.setMotDePasse(motDePasse);
+        }
+        if (!user.getTelephone().equals(telephone)) {
+        	resultatQuery.setTelephone(telephone);
+        }
+        if (!user.getAdresse().equals(adresse)) {
+        	resultatQuery.setAdresse(adresse);
+        }
+        
+        et.begin();
+    	em.merge(resultatQuery);
+    	et.commit();
+        
+        resultatQuery = (Utilisateur) query.getSingleResult();
+        return resultatQuery;
+
+	
+}
 
 }

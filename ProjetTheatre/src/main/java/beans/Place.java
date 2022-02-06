@@ -2,6 +2,7 @@ package beans;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -17,15 +18,16 @@ public class Place implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private byte disponible;
-
 	private int numero;
 
-	private int place;
+	//bi-directional many-to-many association to Billet
+	@ManyToMany(mappedBy="places")
+	private List<Billet> billets;
 
-	private byte reserve;
-
-	private int type;
+	//bi-directional many-to-one association to CategoriePlace
+	@ManyToOne
+	@JoinColumn(name="id_categorie_place")
+	private CategoriePlace categoriePlace;
 
 	public Place() {
 	}
@@ -38,14 +40,6 @@ public class Place implements Serializable {
 		this.id = id;
 	}
 
-	public byte getDisponible() {
-		return this.disponible;
-	}
-
-	public void setDisponible(byte disponible) {
-		this.disponible = disponible;
-	}
-
 	public int getNumero() {
 		return this.numero;
 	}
@@ -54,28 +48,20 @@ public class Place implements Serializable {
 		this.numero = numero;
 	}
 
-	public int getPlace() {
-		return this.place;
+	public List<Billet> getBillets() {
+		return this.billets;
 	}
 
-	public void setPlace(int place) {
-		this.place = place;
+	public void setBillets(List<Billet> billets) {
+		this.billets = billets;
 	}
 
-	public byte getReserve() {
-		return this.reserve;
+	public CategoriePlace getCategoriePlace() {
+		return this.categoriePlace;
 	}
 
-	public void setReserve(byte reserve) {
-		this.reserve = reserve;
-	}
-
-	public int getType() {
-		return this.type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
+	public void setCategoriePlace(CategoriePlace categoriePlace) {
+		this.categoriePlace = categoriePlace;
 	}
 
 }

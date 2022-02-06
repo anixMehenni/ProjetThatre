@@ -71,5 +71,10 @@ public class GestionRepresentations {
     	
     	return newRepresentations;
     }
+    
+    public Representation findOne(int id) {
+    	EntityManager em = emf.createEntityManager();    
+    	return em.find(Representation.class, id);
+    }
 
 }

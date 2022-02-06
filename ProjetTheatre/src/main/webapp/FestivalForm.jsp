@@ -23,99 +23,106 @@
 </head>
 
 <body>
-	<div class="container">	
-		<h3 class="text-center display-4 my-5">Création festival</h3>
+	<div class="container">
+		<div class="d-flex flex-column align-items-center my-5">
+			<a href="/ProjetTheatre/bo/festival">Retour</a>
+			<h3 class="text-center display-4 mt-3">Création festival</h3>
+		</div>
 	
-		<form method="POST" enctype="multipart/form-data">
-			<div class="row">
-				<div class="col">
-					<div class="form-group">
-					    <label for="nom">Nom</label>
-					    <input type="text" class="form-control" id="nom" name="nom">
-				    </div>
-				    
-				    <div class="form-group">
-					    <label for="ville">Ville</label>
-					    <input type="text" class="form-control" id="ville" name="ville">
-				    </div>
-				    
-				    <div class="form-group">
-					    <label for="description">Déscription</label>
-					    <textarea class="form-control" id="description" rows="5" name="description"></textarea>
-					</div>
-					
+		<div class="row justify-content-center">
+			<div class="col-8">
+				<form method="POST" enctype="multipart/form-data">
 					<div class="row">
 						<div class="col">
 							<div class="form-group">
-							    <label for="dateDebut">Début</label>
-							    <input type="date" class="form-control" id="dateDebut" name="dateDebut">
+							    <label for="nom">Nom</label>
+							    <input type="text" class="form-control" id="nom" name="nom" required>
 						    </div>
-						</div>
-						<div class="col">
-							<div class="form-group">
-							    <label for="dateFin">Fin</label>
-							    <input type="date" class="form-control" id="dateFin" name="dateFin">
+						    
+						    <div class="form-group">
+							    <label for="ville">Ville</label>
+							    <input type="text" class="form-control" id="ville" name="ville" required>
 						    </div>
-						</div>			
-					</div>
-					
-					<div class="form-group">
-					    <label for="photos">Photos</label>
-					    <input type="file" class="form-control-file" id="photos" name="photos" multiple="true">
-					</div>
-				</div>
-				
-				<div class="col" id="rightSide">
-						<div class="mb-5">			
-							<label for="organisateurs">Organisateurs</label>	
-							
-							<div class="row my-2">
-								<div class="col">
-									<select name="organisateurs" class="form-control">
-								        <option value=""></option>
-										<% for (Organisateur organisateur: (ArrayList<Organisateur>) request.getAttribute("organisateurs")) { %>
-											<option value="<%= organisateur.getId() %>"><%= organisateur.getNom() %></option>
-										<% } %>
-								    </select>						    
-								</div>
-								<div class="col-1">										
-									<button type="button" class="btn btn-outline-danger" data-target="organisateurs">-</button>
-								</div>
+						    
+						    <div class="form-group">
+							    <label for="description">Déscription</label>
+							    <textarea class="form-control" id="description" rows="5" name="description" minlength="50" maxlength="250" required></textarea>
 							</div>
 							
-							<div class="row justify-content-center mt-3" id="addOrganisateurBtn">			
-								<button type="button" class="btn btn-outline-primary">+</button>
-							</div>	
+							<div class="row">
+								<div class="col">
+									<div class="form-group">
+									    <label for="dateDebut">Début</label>
+									    <input type="date" class="form-control" id="dateDebut" name="dateDebut" required>
+								    </div>
+								</div>
+								<div class="col">
+									<div class="form-group">
+									    <label for="dateFin">Fin</label>
+									    <input type="date" class="form-control" id="dateFin" name="dateFin" required>
+								    </div>
+								</div>			
+							</div>
+							
+							<div class="form-group">
+							    <label for="photos">Photos</label>
+							    <input type="file" class="form-control-file" id="photos" name="photos" multiple="true">
+							</div>
 						</div>
 						
-						<div>					
-							<label for="sponsors">Sponsors</label>	
-							
-							<div class="row my-2">
-								<div class="col">
-									<select name="sponsors" class="form-control">
-								        <option value=""></option>
-										<% for (Sponsor sponsor: (ArrayList<Sponsor>) request.getAttribute("sponsors")) { %>
-											<option value="<%= sponsor.getId() %>"><%= sponsor.getNom() %></option>
-										<% } %>
-								    </select>						    
+						<div class="col" id="rightSide">
+								<div class="mb-5">			
+									<label for="organisateurs">Organisateurs</label>	
+									
+									<div class="row my-2">
+										<div class="col">
+											<select name="organisateurs" class="form-control" required>
+										        <option value=""></option>
+												<% for (Organisateur organisateur: (ArrayList<Organisateur>) request.getAttribute("organisateurs")) { %>
+													<option value="<%= organisateur.getId() %>"><%= organisateur.getNom() %></option>
+												<% } %>
+										    </select>						    
+										</div>
+										<div class="col-1">										
+											<button type="button" class="btn btn-outline-danger" data-target="organisateurs">-</button>
+										</div>
+									</div>
+									
+									<div class="row justify-content-center mt-3" id="addOrganisateurBtn">			
+										<button type="button" class="btn btn-outline-primary">+</button>
+									</div>	
 								</div>
-								<div class="col-1">										
-									<button type="button" class="btn btn-outline-danger" data-target="sponsors">-</button>
+								
+								<div>					
+									<label for="sponsors">Sponsors</label>	
+									
+									<div class="row my-2">
+										<div class="col">
+											<select name="sponsors" class="form-control" required>
+										        <option value=""></option>
+												<% for (Sponsor sponsor: (ArrayList<Sponsor>) request.getAttribute("sponsors")) { %>
+													<option value="<%= sponsor.getId() %>"><%= sponsor.getNom() %></option>
+												<% } %>
+										    </select>						    
+										</div>
+										<div class="col-1">										
+											<button type="button" class="btn btn-outline-danger" data-target="sponsors">-</button>
+										</div>
+									</div>
+									
+									<div class="row justify-content-center mt-3" id="addSponsorBtn">			
+										<button type="button" class="btn btn-outline-primary">+</button>
+									</div>
 								</div>
-							</div>
-							
-							<div class="row justify-content-center mt-3" id="addSponsorBtn">			
-								<button type="button" class="btn btn-outline-primary">+</button>
-							</div>
-						</div>
-					</div>			
+							</div>			
+					</div>
+					
+					<div class="row justify-content-center my-3">			
+						<button type="submit" class="btn btn-primary" id="submitButton">Créer</button>
+					</div>
+				</form>
 			</div>
-			
-			<div class="row justify-content-center my-3">			
-				<button type="submit" class="btn btn-primary">Créer</button>
-			</div>
-		</form>
+		</div>
 	</div>
 <script type="text/javascript" src="/ProjetTheatre/js/festivalForm.js"></script>
 </body>

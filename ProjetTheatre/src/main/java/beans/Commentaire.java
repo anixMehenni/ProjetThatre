@@ -32,7 +32,7 @@ public class Commentaire implements Serializable {
 
 	//bi-directional many-to-one association to Utilisateur
 	@ManyToOne
-	@JoinColumn(name="id_utilisateur")
+	@JoinColumn(name="id_utilisateur", nullable=true)
 	private Utilisateur utilisateur;
 
 	public Commentaire() {
