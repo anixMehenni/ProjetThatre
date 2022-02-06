@@ -55,9 +55,9 @@ public class CreationCompteAbonneServlet extends HttpServlet {
 	        int resultat = gestionUtilisateurs.ajouterNouveauAbonne(nom, prenom, email, motDePasse, telephone, adresse);
 	        
 	        if (resultat == 1) {
-	        getServletContext().getRequestDispatcher("/abonneAjouteSucces.jsp").forward(request, response);
+	        getServletContext().getRequestDispatcher("/ConnexionAbonneServlet").forward(request, response);
 	        }else {
-	        	getServletContext().getRequestDispatcher("/abonneAjouteEchec.jsp").forward(request, response);
+	        	getServletContext().getRequestDispatcher("/CreationCompteAbonneServlet").forward(request, response);
 	        }
 		}catch(Exception e) {
 			e.printStackTrace();
