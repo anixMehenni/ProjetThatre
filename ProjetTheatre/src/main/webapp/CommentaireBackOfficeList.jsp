@@ -5,6 +5,7 @@
 
 <div class="container">
 	<h1 class="text-center my-5">Gestion des commentaires</h1>	
+	<% currentUser = (Utilisateur) session.getAttribute("_UTILISATEUR_COURANT"); %>
 	
 	<form class="my-5" method="GET" id="searchForm">
 		<div class="row justify-content-between align-items-center">
@@ -81,7 +82,7 @@
 							<form method="POST">
 								<input type="hidden" name="commentaire" value="<%= commentaire.getId() %>" />
 								<input type="hidden" name="newStatut" />
-								
+								<% if (currentUser.getRole().equals("MODERATEUR")) { %>
 								<% if (Commentaire.StatutEnum.valueOf(commentaire.getStatut()) != Commentaire.StatutEnum.VALIDE) { %>
 									<button type="submit" class="btn btn-outline-success" data-statut="<%= Commentaire.StatutEnum.VALIDE %>">
 										Valider
@@ -92,6 +93,7 @@
 									<button type="submit" class="btn btn-outline-danger" data-statut="<%= Commentaire.StatutEnum.REJETE %>">
 										Refuser
 									</button>
+								<% } %>
 								<% } %>
 							</form>
 						</td>
