@@ -3,6 +3,7 @@ package beans;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -20,9 +21,13 @@ public class Panier implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="date_creation")
-	private Date dateCreation;
+	private Date dateCreation = new Date();
 
-	private String statut;
+	private String statut = "A PAYER";
+
+	//bi-directional many-to-one association to Billet
+	@OneToMany(mappedBy="panier")
+	private List<Billet> billets;
 
 	//bi-directional many-to-one association to Paiement
 	@ManyToOne
@@ -59,6 +64,28 @@ public class Panier implements Serializable {
 
 	public void setStatut(String statut) {
 		this.statut = statut;
+	}
+
+	public List<Billet> getBillets() {
+		return this.billets;
+	}
+
+	public void setBillets(List<Billet> billets) {
+		this.billets = billets;
+	}
+
+	public Billet addBillet(Billet billet) {
+		getBillets().add(billet);
+		billet.setPanier(this);
+
+		return billet;
+	}
+
+	public Billet removeBillet(Billet billet) {
+		getBillets().remove(billet);
+		billet.setPanier(null);
+
+		return billet;
 	}
 
 	public Paiement getPaiement() {
