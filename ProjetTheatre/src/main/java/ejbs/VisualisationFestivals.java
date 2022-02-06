@@ -54,6 +54,10 @@ public class VisualisationFestivals {
     
     private final static String _SQL_SELECT_Photos = "select * from photo where id_festival = ";
     
+    private final static String _SQL_SELECT_idOrganisateurs = "select * from festival_organisateur where id_festival = ";
+    
+    private final static String _SQL_SELECT_Organisateurs = "select * from organisateur where id = ";
+    
     
     public Festival recupererFestival() {
     	DataSource dataSource = null;
@@ -132,7 +136,7 @@ public class VisualisationFestivals {
     		connection = dataSource.getConnection();
     		preparedStatement = connection.prepareStatement(_SQL_SELECT_Theathre);
     		
-    		preparedStatement2 = connection.prepareStatement(_SQL_SELECT_SponsorId + Integer.toString(IdFest));
+    		preparedStatement2 = connection.prepareStatement(_SQL_SELECT_idOrganisateurs + Integer.toString(IdFest));
     		resultSet2 = preparedStatement2.executeQuery();
     		System.out.println(IdFest);
     		resultSet2.next();
@@ -154,6 +158,50 @@ public class VisualisationFestivals {
     	
     }
     
+public List<String> recupererOrganisateurs(int IdFestival){
+    	
+    	DataSource dataSource = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedStatement2 = null;
+		PreparedStatement preparedStatement3 = null;
+		ResultSet resultSet = null;
+		ResultSet resultSet2 = null;
+		ResultSet resultSet3 = null;
+		List<String> organisateurs = new ArrayList<String>();
+		
+        
+    	try {
+    		InitialContext initialContext = new InitialContext();
+    		dataSource = (DataSource) initialContext.lookup("java:/TheatreMySqlDS");
+    		connection = dataSource.getConnection();
+    		
+    		preparedStatement2 = connection.prepareStatement(_SQL_SELECT_idOrganisateurs+ Integer.toString(IdFestival));
+    		resultSet2 = preparedStatement2.executeQuery();
+    		
+    		
+    		while(resultSet2.next()) {
+    			int result = 0;
+    			result = resultSet2.getInt(2);
+    			preparedStatement3 = connection.prepareStatement(_SQL_SELECT_Organisateurs+ result);
+        		resultSet3 = preparedStatement3.executeQuery();
+        		while(resultSet3.next()) {
+        			organisateurs.add(resultSet3.getString(2));
+        			
+        			
+        		}
+    		}
+    		
+    		return organisateurs;
+    		
+    	}
+    	catch (Exception e) {
+    		System.out.println("AAAAAAA");
+			System.out.println(e.getMessage().toString());
+			return organisateurs;
+		}
+    	
+    }
     
     public List<String> recupererPhotosPieces(int IdFestival){
     	

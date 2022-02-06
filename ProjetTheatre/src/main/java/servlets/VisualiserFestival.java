@@ -31,6 +31,8 @@ public class VisualiserFestival extends HttpServlet {
 		String sponsor = festival.recupererSponsor(fest.getId());
 		List<String> photos = festival.recupererPhotosPieces(fest.getId());
 		List<String> Ids = festival.recupererIdsPieces(fest.getId());
+		List<String> organisateurs = festival.recupererOrganisateurs(fest.getId());
+		System.out.println("HEEEEEY" +organisateurs.get(0));
 		request.setAttribute("nomFestival",fest.getNom());
 		request.setAttribute("villeFestival",fest.getVille());
 		request.setAttribute("descriptionFestival",fest.getDescription());
@@ -39,6 +41,7 @@ public class VisualiserFestival extends HttpServlet {
 		request.setAttribute("sponsor",sponsor);
 		request.setAttribute("photos",photos);
 		request.setAttribute("Ids", Ids);
+		request.setAttribute("organisateurs", organisateurs);
 		getServletContext().getRequestDispatcher("/festivalPage.jsp").forward(request, response);
 	}
 

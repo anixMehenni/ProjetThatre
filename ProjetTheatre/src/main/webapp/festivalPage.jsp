@@ -32,13 +32,22 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body style="background-color:#8B0000 " >
-	<h1 style="color:#FFFFFF "><%
+<body style="background-color:#f8f9fa;" >
+<div class="container">
+  <div class="row my-3 justify-content-center">
+  	<div class="col-6">
+			<p class="display-4 text-center font-weight-bold"><%
 	String nomFestival = (String) request.getAttribute("nomFestival");
 	out.println(nomFestival);
-	%></h1>
-	<h4 style="color:#FFFFFF ">Dates</h4>
-	<p style="color:#FFFFFF ">Du 
+	%></p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+  	<div class="col-6">
+			<p class="h4 text-center font-weight-bold">Dates</p>
+	<p class="h6 text-center">Du 
 	<%
 	Date date = (Date) request.getAttribute("DateDebutFestival");
 	   out.print(date.toString());
@@ -48,16 +57,34 @@
 	   out.print(dateFin.toString());
 	%>
 	</p>
-	<h3 style="color:#FFFFFF ">Lieu</h3>
-	<p style="color:#FFFFFF "><%
+    </div>
+    <div class="col-6">
+  		<p class="h3 text-center font-weight-bold">Lieu</p>
+	<p class="h6 text-center"><%
 	String ville = (String) request.getAttribute("villeFestival");
 	   out.print(ville);
 	%> </p>
+    </div>
+  </div>
+</div>
 	
-<h3 style="color:#FFFFFF ">A l'affiche !</h3>
+<div class="container">
+  <div class="row">
+  <div class="col"></div>
+  	<div class="col-10">
+	<p class="h3 font-weight-bold">A l'affiche !</p>
+    </div>
+    <div class="col"></div>
+  </div>
+</div>
+	
+	
+	
+
 
 <% List<String> photos = (List<String>) request.getAttribute("photos"); %>
 <% List<String> Ids = (List<String>) request.getAttribute("Ids"); %>
+<% List<String> organisateurs = (List<String>) request.getAttribute("organisateurs"); %>
 
 <div class="container">
   <div class="row">
@@ -71,7 +98,7 @@
 						<div class="hero featured-carousel owl-carousel">
 							<div class="item">
 								<div class="work">
-								<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(0) %>&pic=<%= photos.get(0) %>">
+								<a href="/ProjetTheatre/piece/view?id=<%= Ids.get(0) %>">
 								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(0) %>);">
 										
 									</div>
@@ -81,8 +108,8 @@
 							</div>
 							<div class="item">
 								<div class="work">
-									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(0) %>&pic=<%= photos.get(1) %>">
-								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(1) %>);">
+									<a href="/ProjetTheatre/piece/view?id=<%= Ids.get(0) %>">
+								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(0) %>);">
 										
 									</div>
 								</a>
@@ -90,8 +117,8 @@
 							</div>
 							<div class="item">
 								<div class="work">
-									<a href="/ProjetTheatre/VisualiserPiece?id=<%= Ids.get(0) %>&pic=<%= photos.get(2) %>">
-								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(2) %>);">
+									<a href="/ProjetTheatre/piece/view?id=<%= Ids.get(0) %>">
+								<div class="img d-flex align-items-center justify-content-center" style="background-image: url(<%= photos.get(0) %>);">
 										
 									</div>
 								</a>
@@ -110,20 +137,51 @@
   </div>
 </div>
 
-<h3 style="color:#FFFFFF ">Historique du festival</h3>
-<p style="text-align: justify;color:#FFFFFF" >
-<%
-	String descriptif = (String) request.getAttribute("descriptionFestival");
-	   out.print(descriptif);
-	%>
-</p>
-<h3 style="color:#FFFFFF ">Sponsors</h3>
-<p style="color:#FFFFFF ">
-<%
-	String response3 = (String) request.getAttribute("sponsor");
-	out.println(response3);
-	%>
-</p>
+<div class="container">
+  <div class="row">
+  	<div class="col-8">
+  		<p class="h3">Historique du festival</p>
+		<p style="text-align:justify" >
+			<%
+				String descriptif = (String) request.getAttribute("descriptionFestival");
+	   			out.print(descriptif);
+			%>
+		</p>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+  	<div class="col-6">
+  		<p class="h3">Organisateurs</p>
+			<p >
+				<% for(int i = 0; i < organisateurs.size(); i+=1) { %>
+				<p>
+            <% out.println(organisateurs.get(i)); %>;
+            </p>
+        <% } %>
+			</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+  	<div class="col-6">
+  		<p class="h3">Sponsors</p>
+			<p >
+				<%
+					String response3 = (String) request.getAttribute("sponsor");
+					out.println(response3);
+				%>
+			</p>
+    </div>
+  </div>
+</div>
+
+
 <ul>
 
 	
