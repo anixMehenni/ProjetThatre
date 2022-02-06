@@ -130,10 +130,10 @@
 									</div>
 									<div class="item">
 										<div class="work">
-											<a href="/ProjetTheatre/piece/view?id=<%=Ids.get(0)%>">
+											<a href="/ProjetTheatre/piece/view?id=<%=Ids.get(1)%>">
 												<div
 													class="img d-flex align-items-center justify-content-center"
-													style="background-image: url(<%=photos.get(0)%>);">
+													style="background-image: url(<%=photos.get(1)%>);">
 
 												</div>
 											</a>
@@ -141,10 +141,10 @@
 									</div>
 									<div class="item">
 										<div class="work">
-											<a href="/ProjetTheatre/piece/view?id=<%=Ids.get(0)%>">
+											<a href="/ProjetTheatre/piece/view?id=<%=Ids.get(2)%>">
 												<div
 													class="img d-flex align-items-center justify-content-center"
-													style="background-image: url(<%=photos.get(0)%>);">
+													style="background-image: url(<%=photos.get(2)%>);">
 
 												</div>
 											</a>
