@@ -55,9 +55,9 @@ public class CreationCompteModerateurServlet extends HttpServlet {
 	        int resultat = gestionUtilisateurs.ajouterNouveauModerateur(nom, prenom, email, motDePasse, telephone, adresse, role);
 	        
 	        if (resultat == 1) {
-	        getServletContext().getRequestDispatcher("/abonneAjouteSucces.jsp").forward(request, response);
+	        getServletContext().getRequestDispatcher("/VisualiserFestival").forward(request, response);
 	        }else {
-	        	getServletContext().getRequestDispatcher("/abonneAjouteEchec.jsp").forward(request, response);
+	        	getServletContext().getRequestDispatcher("/CreationCompteModerateurServlet").forward(request, response);
 	        }
 		}catch(Exception e) {
 			e.printStackTrace();

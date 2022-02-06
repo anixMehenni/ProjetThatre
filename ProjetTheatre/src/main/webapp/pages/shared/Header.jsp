@@ -107,22 +107,27 @@
 						<li class="nav-item active"><a
 							href="../../ProjetTheatre/VisualiserFestival" class="nav-link">Accueil</a>
 						</li>
-						<li class="nav-item"><a href="#" class="nav-link">Panier</a></li>
+						
 						
 						<%if (currentUser == null) { %>
 						<li class="nav-item"><a
 							href="../../ProjetTheatre/ConnexionAbonneServlet"
 							class="nav-link">Se connecter</a></li>
 						<% } %>
+						
 						<%if (currentUser != null) { %>
+						<li class="nav-item"><a 
+						href="../../ProjetTheatre/paniers" 
+						class="nav-link">Panier</a></li>
 						<li class="nav-item"><a
 							href="../../ProjetTheatre/GestionCompteServlet"
 							class="nav-link">Mon compte</a></li>
 						
 						<li class="nav-item"><a
-							href="../../ProjetTheatre/ConnexionAbonneServlet"
+							href="../../ProjetTheatre/DeconnexionServlet"
 							class="nav-link">Se déconnecter</a></li>
-						<% } %>
+						
+						
 						<li class="dropdown nav-item d-md-flex align-items-center"><a
 							href="#"
 							class="dropdown-toggle nav-link d-flex align-items-center justify-content-center icon-cart p-0"
@@ -131,14 +136,16 @@
 						</a>
 							<div class="dropdown-menu dropdown-menu-right"
 								aria-labelledby="dropdown04">
-								<a href="#" class="dropdown-item">Action</a> <a href="#"
-									class="dropdown-item">Another action</a> <a href="#"
-									class="dropdown-item">Something else here</a>
-								<div class="dropdown-divider"></div>
-								<a href="#" class="dropdown-item">Separated link</a>
-								<div class="dropdown-divider"></div>
-								<a href="#" class="dropdown-item">One more separated link</a>
+								<% if (currentUser.getRole().equals("MODERATEUR")) { %>
+								<a href="../../ProjetTheatre/commentaire/validation" class="dropdown-item">Gestion des commentaires</a> 
+								<% }%>
+								<% if (currentUser.getRole().equals("ADMINISTRATEUR")) { %>
+								<a href="../../ProjetTheatre/CreationCompteModerateurServlet"
+									class="dropdown-item">Ajouter un modérateur</a>
+								<% }%>
 							</div></li>
+							
+							<% } %>
 					</ul>
 				</div>
 			</div>

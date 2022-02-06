@@ -63,11 +63,11 @@ public class ConnexionAbonneServlet extends HttpServlet {
             
                  HttpSession session = request.getSession();
                  session.setAttribute(Utilisateur._UTILISATEUR_COURANT, currentUser);
-                 getServletContext().getRequestDispatcher("/connexionReussie.jsp")
+                 getServletContext().getRequestDispatcher("/VisualiserFestival")
                          .forward(request, response);
              
 		     }catch (NoResultException e) {
-		    	 getServletContext().getRequestDispatcher("/connexionEchouee.jsp")
+		    	 getServletContext().getRequestDispatcher("/ConnexionAbonneServlet")
                  .forward(request, response);
              }
 		
