@@ -142,6 +142,8 @@
 								<% if (currentUser.getRole().equals("ADMINISTRATEUR")) { %>
 								<a href="../../ProjetTheatre/CreationCompteModerateurServlet"
 									class="dropdown-item">Ajouter un modérateur</a>
+									<a href="../../ProjetTheatre/bo/piece"
+									class="dropdown-item">Pièces de théatre</a>
 								<% }%>
 							</div></li>
 							<% } %>
